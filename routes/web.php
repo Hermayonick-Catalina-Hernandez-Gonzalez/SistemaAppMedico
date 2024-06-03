@@ -26,3 +26,7 @@ Route::get('/clinica/Medico', function () {
 Route::get('/clinica/Secretaria', function () {
     return view('secretaria');
 });
+
+Route::get('/medicos.dashboard', function () {
+    return view('dashboard');
+});
