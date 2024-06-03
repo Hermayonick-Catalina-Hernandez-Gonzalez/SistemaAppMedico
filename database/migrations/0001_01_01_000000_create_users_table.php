@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('Paciente'); // Por default se crea como paciente
+            $table->string('profesion')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -30,16 +30,34 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nombre' => ['required', 'string', 'max:255'],
+            'apellido' => ['required', 'string', 'max:255'],
+            'fecha_nacimiento' => ['required', 'date'],
+            'telefono' => ['required', 'string', 'max:15'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8'],
+            'role' => ['required', 'string', 'in:Paciente,Médico,Secretario,Administrador'],
+            'profesion' => ['nullable', 'string', 'max:255', 'required_if:role,Médico'],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'telefono' => $request->telefono,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'profesion' => $request->profesion,
         ]);
+
+        if ($request->role === 'Médico') {
+            $user->medico()->create([
+                'profesion' => $request->profesion,
+            ]);
+        } elseif ($request->role === 'Secretario') {
+            $user->secretario()->create();
+        }
 
         event(new Registered($user));
 
