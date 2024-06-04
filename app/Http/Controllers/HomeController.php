@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function dashboard()
+    public function welcome()
     {
         return view('welcome');
     }
