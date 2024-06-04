@@ -17,12 +17,35 @@
         @csrf
         @method('patch')
 
+        <!-- Nombre -->
         <div>
-            <x-input-label for="name" :value="__('Nombre')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="nombre" :value="__('Nombre')" />
+            <x-text-input id="nombre" name="nombre" type="text" class="mt-1 block w-full" :value="old('nombre', $user->nombre)" required autofocus autocomplete="nombre" />
+            <x-input-error class="mt-2" :messages="$errors->get('nombre')" />
         </div>
 
+        <!-- Apellido -->
+        <div>
+            <x-input-label for="apellido" :value="__('Apellido')" />
+            <x-text-input id="apellido" name="apellido" type="text" class="mt-1 block w-full" :value="old('apellido', $user->apellido)" required autocomplete="apellido" />
+            <x-input-error class="mt-2" :messages="$errors->get('apellido')" />
+        </div>
+
+        <!-- Fecha de Nacimiento -->
+        <div>
+            <x-input-label for="fecha_nacimiento" :value="__('Fecha de Nacimiento')" />
+            <x-text-input id="fecha_nacimiento" name="fecha_nacimiento" type="date" class="mt-1 block w-full" :value="old('fecha_nacimiento', $user->fecha_nacimiento)" required autocomplete="fecha_nacimiento" />
+            <x-input-error class="mt-2" :messages="$errors->get('fecha_nacimiento')" />
+        </div>
+
+        <!-- Teléfono -->
+        <div>
+            <x-input-label for="telefono" :value="__('Teléfono')" />
+            <x-text-input id="telefono" name="telefono" type="text" class="mt-1 block w-full" :value="old('telefono', $user->telefono)" required autocomplete="telefono" />
+            <x-input-error class="mt-2" :messages="$errors->get('telefono')" />
+        </div>
+
+        <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Correo Electrónico')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
