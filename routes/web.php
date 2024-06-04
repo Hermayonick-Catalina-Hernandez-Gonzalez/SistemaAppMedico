@@ -1,15 +1,22 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function(){
     return view('welcome');
 });
+
+// Ruta para médicos
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware([`auth`, `role:Médico`])->name('medico.home');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,14 +26,3 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/clinica/Medico', function () {
-    return view('medico');
-});
-
-Route::get('/clinica/Secretaria', function () {
-    return view('secretaria');
-});
-
-Route::get('/medicos.dashboard', function () {
-    return view('dashboard');
-});

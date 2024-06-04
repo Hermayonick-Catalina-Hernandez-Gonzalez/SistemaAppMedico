@@ -65,4 +65,17 @@ class RegisteredUserController extends Controller
 
         return redirect(route('dashboard', absolute: false));
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if($user->role === 'Administrador') {
+            return redirect()->route('admin.home');
+        } elseif($user->role === 'Médico') {
+            return redirect()->route('medico.home');
+        } elseif($user->role === 'Secretario') {
+            return redirect()->route('secretario.home');
+        } else {
+            return redirect()->route('/auth/login');
+        }
+    }
 }
