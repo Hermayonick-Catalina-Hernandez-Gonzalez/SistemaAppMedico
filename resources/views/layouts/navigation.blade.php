@@ -5,16 +5,65 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ Auth::user()->role === 'Administrador' ? route('admin.dashboard') : route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="Auth::user()->role === 'Administrador' ? route('admin.dashboard') : route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    {{-- admin links --}}
+                    @if (Auth::user()->role === 'Administrador')
+                        <x-nav-link href="route('admin/registro-pacientes')" :active="request()->routeIs('admin.registro-pacientes')">
+                            {{ __('Registro Pacientes') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="route('admin/registro-medicos')" :active="request()->routeIs('admin.registro-medicos')">
+                            {{ __('Registro Médicos') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="route('admin/registro-pacientes')" :active="request()->routeIs('admin.registro-pacientes')">
+                            {{ __('Registro Pacientes') }}
+                        </x-nav-link>
+                        
+                    @endif
+
+                    {{-- medico links --}}
+                    @if (Auth::user()->role === 'Médico')
+                        <x-nav-link href="route('medico/registro-pacientes')" :active="request()->routeIs('medico.registro-pacientes')">
+                            {{ __('Registro Pacientes') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="route('medico/consultas')" :active="request()->routeIs('medico.consultas')">
+                            {{ __('Consultas') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="route('medico/crear-cita')" :active="request()->routeIs('medico.crear-cita')">
+                            {{ __('Crear Cita') }}
+                        </x-nav-link>
+                        
+                    @endif
+
+                    {{-- secretario links --}}
+                    @if (Auth::user()->role === 'Secretario')
+                        <x-nav-link href="route('secretario/registro-pacientes')" :active="request()->routeIs('secretario.registro-pacientes')">
+                            {{ __('Registro Pacientes') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="route('secretario/consultas')" :active="request()->routeIs('secretario.consultas')">
+                            {{ __('Consultas') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="route('secretario/crear-cita')" :active="request()->routeIs('secretario.crear-cita')">
+                            {{ __('Crear Cita') }}
+                        </x-nav-link>
+                        
+                    @endif
+
                 </div>
             </div>
 
