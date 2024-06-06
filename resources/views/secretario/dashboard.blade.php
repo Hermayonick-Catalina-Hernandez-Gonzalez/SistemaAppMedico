@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <!-- Te da la bienvenida con el nombre del usuario-->
-                    {{ __("Bienvenido secretario" . Auth::user()->nombre . " " . Auth::user()->apellido . "!") }}
+                    {{ __("Bienvenido secretario " . Auth::user()->nombre . " " . Auth::user()->apellido . "!") }}
                 </div>
             </div>
         </div>
