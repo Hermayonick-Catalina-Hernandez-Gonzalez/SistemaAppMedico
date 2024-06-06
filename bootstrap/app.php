@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AdministradorMiddleware;
 use App\Http\Middleware\MedicoMiddleware;
+use App\Http\Middleware\SecretarioMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'MedicoMiddleware'=> MedicoMiddleware::class,
             'AdministradorMiddleware'=> AdministradorMiddleware::class,
+            'SecretarioMiddleware'=> SecretarioMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
