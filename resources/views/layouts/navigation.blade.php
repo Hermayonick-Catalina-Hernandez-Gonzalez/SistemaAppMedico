@@ -50,15 +50,15 @@
 
                     {{-- secretario links --}}
                     @if (Auth::user()->role === 'Secretario')
-                        <x-nav-link href="route('secretario/registro-pacientes')" :active="request()->routeIs('secretario.registro-pacientes')">
+                        <x-nav-link href="{{ route('secretario.registro-pacientes') }}" :active="request()->routeIs('secretario.registro-pacientes')">
                             {{ __('Registro Pacientes') }}
                         </x-nav-link>
 
-                        <x-nav-link href="route('secretario/consultas')" :active="request()->routeIs('secretario.consultas')">
+                        <x-nav-link href="{{ route('secretario.consultas') }}" :active="request()->routeIs('secretario.consultas')">
                             {{ __('Consultas') }}
                         </x-nav-link>
 
-                        <x-nav-link href="route('secretario/crear-cita')" :active="request()->routeIs('secretario.crear-cita')">
+                        <x-nav-link href="{{ route('secretario.crear-cita') }}" :active="request()->routeIs('secretario.crear-cita')">
                             {{ __('Crear Cita') }}
                         </x-nav-link>
                         

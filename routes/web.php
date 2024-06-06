@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\Admin\AdministradorController;
 use App\Http\Controllers\ConsultasMEDICOController;
+use App\Http\Controllers\ConsultasSECRETARIOController;
 use App\Http\Controllers\CrearCitasMEDICOController;
+use App\Http\Controllers\CrearCitasSecretarioController;
 use App\Http\Controllers\Medico\MedicoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistroMedicosADMINController;
 use App\Http\Controllers\RegistroPacientesADMINController;
 use App\Http\Controllers\RegistroPacientesMEDICOController;
+use App\Http\Controllers\RegistroPacientesSECRETARIOController;
 use App\Http\Controllers\RegistroSecretarioADMINController;
 use App\Http\Controllers\Secretario\SecretarioController;
 use Illuminate\Support\Facades\Route;
@@ -48,5 +51,8 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
 // Rutas para el secretario
 Route::middleware(['auth', 'SecretarioMiddleware'])->group(function(){
     Route::get('/secretario/dashboard', [SecretarioController::class, 'index'])->name('secretario.dashboard');
+    Route::get('/secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'index'])->name('secretario.registro-pacientes');
+    Route::get('/secretario/consultas', [ConsultasSECRETARIOController::class, 'index'])->name('secretario.consultas');
+    Route::get('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'index'])->name('secretario.crear-cita');
 });
     
