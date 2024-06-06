@@ -18,15 +18,15 @@
 
                     {{-- admin links --}}
                     @if (Auth::user()->role === 'Administrador')
-                        <x-nav-link href="admin/registro-pacientes" :active="request()->routeIs('admin.registro-pacientes')">
+                    <x-nav-link href="{{ route('admin.registro-pacientes') }}" :active="request()->routeIs('admin.registro-pacientes')">
                             {{ __('Registro Pacientes') }}
                         </x-nav-link>
 
-                        <x-nav-link href="admin/registro-medicos" :active="request()->routeIs('admin.registro-medicos')">
+                        <x-nav-link href="{{ route('admin.registro-medicos') }}" :active="request()->routeIs('admin.registro-medicos')">
                             {{ __('Registro Médicos') }}
                         </x-nav-link>
 
-                        <x-nav-link href="route('admin/registro-secretarios')" :active="request()->routeIs('admin.registro-secretarios')">
+                        <x-nav-link href="{{ route('admin.registro-secretarios') }}" :active="request()->routeIs('admin.registro-secretarios')">
                             {{ __('Registro Secretarios') }}
                         </x-nav-link>
                         
