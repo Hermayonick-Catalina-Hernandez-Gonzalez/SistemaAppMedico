@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
             'telefono' => ['required', 'string', 'max:15'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:8'],
-            'role' => ['required', 'string', 'in:Paciente,Médico,Secretario,Administrador'],
+            'role' => ['required', 'string', 'in:Médico,Secretario,Administrador'],
             'profesion' => ['nullable', 'string', 'max:255', 'required_if:role,Médico'],
         ]);
 

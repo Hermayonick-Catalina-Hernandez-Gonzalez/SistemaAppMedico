@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-// Rutas para el medico
+//* Rutas para el medico
 Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
     Route::get('dashboard', [MedicoController::class, 'index'])->name('dashboard');
     Route::get('registro-pacientes', [RegistroPacientesMEDICOController::class, 'index'])->name('registro-pacientes');
@@ -39,7 +39,7 @@ Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
     Route::get('crear-cita', [CrearCitasMEDICOController::class, 'index'])->name('crear-cita');
 });
 
-// Rutas para el administrador
+//* Rutas para el administrador
 Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
     Route::get('/admin/dashboard', [AdministradorController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'index'])->name('admin.registro-pacientes');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
 });
 
 
-// Rutas para el secretario
+//* Rutas para el secretario
 Route::middleware(['auth', 'SecretarioMiddleware'])->group(function(){
     Route::get('/secretario/dashboard', [SecretarioController::class, 'index'])->name('secretario.dashboard');
     Route::get('/secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'index'])->name('secretario.registro-pacientes');

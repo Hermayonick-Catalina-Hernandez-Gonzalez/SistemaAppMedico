@@ -64,7 +64,6 @@
         <div class="mt-4">
             <x-input-label for="role" :value="__('Rol')" />
             <select id="role" name="role" class="block mt-1 w-full form-select">
-                <option value="Paciente">{{__('Paciente')}}</option>
                 <option value="Médico">{{__('Médico')}}</option>
                 <option value="Secretario">{{__('Secretario')}}</option>
                 <option value="Administrador">{{__('Administrador')}}</option>
