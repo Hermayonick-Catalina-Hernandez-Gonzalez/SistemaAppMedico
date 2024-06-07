@@ -6,14 +6,16 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                 <a href="{{ Auth::user()->role === 'Administrador' ? route('admin.dashboard') : (Auth::user()->role === 'Secretario' ? route('secretario.dashboard') : route('dashboard')) }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <div class="shrink-0 flex items-center">
+                        <img src="{{ asset('imagenes/logo2.png') }}" alt="Logo" style="height: 64px; width: auto;">
+                    </div>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link :href="Auth::user()->role === 'Administrador' ? route('admin.dashboard') : (Auth::user()->role === 'Secretario' ? route('secretario.dashboard') : route('dashboard'))" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Inicio') }}
                     </x-nav-link>
 
                     {{-- admin links --}}
@@ -29,7 +31,7 @@
                         <x-nav-link href="{{ route('admin.registro-secretarios') }}" :active="request()->routeIs('admin.registro-secretarios')">
                             {{ __('Registro Secretarios') }}
                         </x-nav-link>
-                        
+
                     @endif
 
                     {{-- medico links --}}
@@ -38,14 +40,14 @@
                             {{ __('Registro Pacientes') }}
                         </x-nav-link>
 
-                        <x-nav-link href="/consultas" :active="request()->routeIs('medico.consultas')">
-                            {{ __('Consultas') }}
-                        </x-nav-link>
 
                         <x-nav-link href="/crear-cita" :active="request()->routeIs('medico.crear-cita')">
                             {{ __('Crear Cita') }}
                         </x-nav-link>
-                        
+
+                        <x-nav-link href="/consultas" :active="request()->routeIs('medico.consultas')">
+                            {{ __('Consultas') }}
+                        </x-nav-link>
                     @endif
 
                     {{-- secretario links --}}
@@ -54,14 +56,14 @@
                             {{ __('Registro Pacientes') }}
                         </x-nav-link>
 
-                        <x-nav-link href="{{ route('secretario.consultas') }}" :active="request()->routeIs('secretario.consultas')">
-                            {{ __('Consultas') }}
-                        </x-nav-link>
-
                         <x-nav-link href="{{ route('secretario.crear-cita') }}" :active="request()->routeIs('secretario.crear-cita')">
                             {{ __('Crear Cita') }}
                         </x-nav-link>
-                        
+
+                        <x-nav-link href="{{ route('secretario.consultas') }}" :active="request()->routeIs('secretario.consultas')">
+                            {{ __('Citas Agendadas') }}
+                        </x-nav-link>
+
                     @endif
 
                 </div>

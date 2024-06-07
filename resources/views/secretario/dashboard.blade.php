@@ -1,21 +1,50 @@
-<?php
-use Illuminate\Support\Facades\Auth;
-?>
-
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Página Principal') }}
-        </h2>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <!-- Te da la bienvenida con el nombre del usuario-->
-                    {{ __("Bienvenido secretario " . Auth::user()->nombre . " " . Auth::user()->apellido . "!") }}
+                    <!-- Te da la bienvenida con el nombre del usuario -->
+                    {{ __("Bienvenido Secretario " . Auth::user()->nombre . " " . Auth::user()->apellido . "!") }}
                 </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Rayos X']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/rayosX.jpg') }}" alt="Rayos X" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Rayos X</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Consulta General']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/consulta.jpg') }}" alt="Consulta General" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Consulta General</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Consulta Psicologica']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/psicologa.jpg') }}" alt="Consulta Psicologica" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Consulta Psicologica</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Ginecologia']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/ginecologo.jpg') }}" alt="Ginecologo" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Ginecologia</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Estudios Toxicologicos']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/toxicologia.jpg') }}" alt="Toxicologia" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Estudios Toxicologicos</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Laboratorio Clinico']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/laboratorio.jpg') }}" alt="laboratorio" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Laboratorio Clinico</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Cardiologia']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/cardiologo.jpg') }}" alt="cardiologo" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Cardiologia</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Pediatria']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/pediatra.jpg') }}" alt="pediatra" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Pediatria</h3>
+                </a>
+                <a href="{{ route('secretario.crear-cita', ['servicio' => 'Nutriologia']) }}" class="block bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="{{ asset('imagenes/Nutriologo.jpg') }}" alt="nutriologo" class="w-full h-40 object-cover rounded-t-lg">
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">Nutriologo</h3>
+                </a>
             </div>
         </div>
     </div>

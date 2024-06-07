@@ -4,7 +4,9 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
+        <div class="flex justify-center mb-4">
+            <img src="{{ asset('imagenes/logo2.png') }}" alt="Logo" class="h-30 w-auto">
+        </div>
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Correo')" />
