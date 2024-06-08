@@ -35,6 +35,7 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
     Route::get('dashboard', [MedicoController::class, 'index'])->name('dashboard');
     Route::get('registro-pacientes', [RegistroPacientesMEDICOController::class, 'index'])->name('registro-pacientes');
+    Route::post('registro-pacientes', [RegistroPacientesMEDICOController::class, 'registro_paciente'])->name('registro-pacientes.store');
     Route::get('consultas', [ConsultasMEDICOController::class, 'index'])->name('consultas');
     Route::get('crear-cita', [CrearCitasMEDICOController::class, 'index'])->name('crear-cita');
 });
