@@ -33,18 +33,20 @@ require __DIR__.'/auth.php';
 
 //* Rutas para el medico
 Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
-    Route::get('dashboard', [MedicoController::class, 'index'])->name('dashboard');
-    Route::get('registro-pacientes', [RegistroPacientesMEDICOController::class, 'index'])->name('registro-pacientes');
-    Route::post('registro-pacientes', [RegistroPacientesMEDICOController::class, 'registro_paciente'])->name('registro-pacientes.store');
+    Route::get('dashboard', [MedicoController::class, 'index'])->name('dashboard'); //* Vista principal del médico
+    Route::get('registro-pacientes', [RegistroPacientesMEDICOController::class, 'index'])->name('registro-pacientes'); //* Vista para registrar pacientes
+    Route::post('registro-pacientes', [RegistroPacientesMEDICOController::class, 'registro_paciente'])->name('registro-pacientes.store'); //* POST a registrar pacientes a BD
     Route::get('consultas', [ConsultasMEDICOController::class, 'index'])->name('consultas');
     Route::get('crear-cita', [CrearCitasMEDICOController::class, 'index'])->name('crear-cita');
 });
 
 //* Rutas para el administrador
 Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
-    Route::get('/admin/dashboard', [AdministradorController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'index'])->name('admin.registro-pacientes');
+    Route::get('/admin/dashboard', [AdministradorController::class, 'index'])->name('admin.dashboard'); //* Vista principal del administrador
+    Route::get('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'index'])->name('admin.registro-pacientes'); //* Vista para registrar pacientes
+    Route::post('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'registro_paciente'])->name('admin.registro-pacientes.store'); //* POST a registrar pacientes a BD
     Route::get('/admin/registro-medicos', [RegistroMedicosADMINController::class, 'index'])->name('admin.registro-medicos');
+    Route::post('/admin/registro-medicos', [RegistroMedicosADMINController::class, 'registro_medico'])->name('admin.registro-medicos.store');
     Route::get('/admin/registro-secretarios', [RegistroSecretarioADMINController::class, 'index'])->name('admin.registro-secretarios');
 });
 

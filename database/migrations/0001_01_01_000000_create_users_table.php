@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default('Paciente'); // Por default se crea como paciente
+            $table->string('role');
             $table->string('profesion')->nullable();
             $table->rememberToken();
             $table->timestamps();
