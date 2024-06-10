@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Citas Medicas</h3>
                 {{-- Buscador --}}
                 <div class="flex justify-between items-center mb-4">
-                    <input type="text" placeholder="Buscar por nombre ..."
+                    <input type="text" placeholder="Buscar por nombre...."
                         class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                 </div>
                 {{-- Tabla --}}
