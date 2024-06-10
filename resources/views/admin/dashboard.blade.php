@@ -22,28 +22,24 @@ use Illuminate\Support\Facades\Auth;
                 <thead>
                     <tr
                         class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Paciente</th>
-                        <th class="py-3 px-6 text-left">Fecha</th>
-                        <th class="py-3 px-6 text-left">Hora</th>
-                        <th class="py-3 px-6 text-left">Tipo de Servicio</th>
+                        <th class="py-3 px-6 text-left">Nombre</th>
+                        <th class="py-3 px-6 text-left">Rol</th>
                         <th class="py-3 px-6 text-left">Acción</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 dark:text-gray-300 text-sm">
                     <tr class="border-b border-gray-200 dark:border-gray-700">
                         <td class="py-3 px-6 text-left">Diego Ortiz</td>
-                        <td class="py-3 px-6 text-left">05/06/2021</td>
-                        <td class="py-3 px-6 text-left">13:00</td>
-                        <td class="py-3 px-6 text-left">Consulta General</td>
+                        <td class="py-3 px-6 text-left">Paciente</td>
                         <td class="py-3 px-6 text-left">
                             <div class="flex space-x-2">
                                 <a href=""
                                     class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                    {{ __('Confirmar Cita') }}
+                                    {{ __('Modificar') }}
                                 </a>
                                 <a href="{{--{{ route('medico.consultas') }} --}}"
                                     class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                    {{ __('Generar Cita') }}
+                                    {{ __('Eliminar') }}
                                 </a>
                             </div>
                         </td>

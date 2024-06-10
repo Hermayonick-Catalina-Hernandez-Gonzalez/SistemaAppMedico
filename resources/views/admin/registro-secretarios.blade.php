@@ -82,16 +82,6 @@
                         <x-input-error :messages="$errors->get('role')" class="mt-2" />
                     </div>
 
-                    <!-- Profesión -->
-                    <!--
-                    <div class="mt-4">
-                        <x-input-label for="profesion" :value="__('Profesión*')" />
-                        <x-text-input id="profesion" class="block mt-1 w-full" type="text" name="profesion"
-                            :value="old('profesion')"  autocomplete="profesion" />
-                        <x-input-error :messages="$errors->get('profesion')" class="mt-2" />
-                    </div>
-                    -->
-
                     <div class="flex items-center justify-center mt-4">
                         <x-primary-button class="ms-4">
                             {{ __('Registrar') }}
