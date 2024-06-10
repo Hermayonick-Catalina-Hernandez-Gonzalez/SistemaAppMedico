@@ -8,7 +8,7 @@
     <div class="py-12 flex justify-center">
         <div class="max-w-lg w-full sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('secretario.registro-pacientes') }}">
                     @csrf
                     <!-- Nombre -->
                     <div>

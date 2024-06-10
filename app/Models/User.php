@@ -13,7 +13,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     // Constantes de roles
-    const ROL_PACIENTE = 'Paciente';
     const ROL_MEDICO = 'Medico';
     const ROL_SECRETARIO = 'Secretario';
     const ROL_ADMIN = 'Admin';
@@ -97,17 +96,6 @@ class User extends Authenticatable
     public function isSecretario()
     {
         return $this->hasRole(self::ROL_SECRETARIO);
-    }
-
-    /**
-     * Determinar si un usuario es paciente
-     * 
-     * @return bool
-     */
-
-    public function isPaciente()
-    {
-        return $this->hasRole(self::ROL_PACIENTE);
     }
 
     /**

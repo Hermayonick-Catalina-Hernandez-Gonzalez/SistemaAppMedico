@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,30 +41,42 @@ class RegisteredUserController extends Controller
             'profesion' => ['nullable', 'string', 'max:255', 'required_if:role,Médico'],
         ]);
 
-        $user = User::create([
-            'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
-            'fecha_nacimiento' => $request->fecha_nacimiento,
-            'telefono' => $request->telefono,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-            'profesion' => $request->profesion,
-        ]);
-
-        if ($request->role === 'Médico') {
-            $user->medico()->create([
+        try {
+            $user = User::create([
+                'nombre' => $request->nombre,
+                'apellido' => $request->apellido,
+                'fecha_nacimiento' => $request->fecha_nacimiento,
+                'telefono' => $request->telefono,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
                 'profesion' => $request->profesion,
             ]);
-        } elseif ($request->role === 'Secretario') {
-            $user->secretario()->create();
+    
+            if ($request->role === 'Médico') {
+                $user->medico()->create([
+                    'profesion' => $request->profesion,
+                ]);
+            } elseif ($request->role === 'Secretario') {
+                $user->secretario()->create();
+            }
+
+            event(new Registered($user));
+
+            // Auth::login($user);
+
+            //session()->flash('success', 'Usuario registrado correctamente');
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al registrar el usuario');
+
+            return redirect()->back()->withInput();
         }
 
-        event(new Registered($user));
+        // Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        // return redirect(route('dashboard', absolute: false));
     }
 
     protected function authenticated(Request $request, $user)
