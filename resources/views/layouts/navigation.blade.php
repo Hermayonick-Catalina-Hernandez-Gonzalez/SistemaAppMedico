@@ -32,6 +32,10 @@
                             {{ __('Registro Secretarios') }}
                         </x-nav-link>
 
+                        <x-nav-link href="{{ route('admin.registro-servicios') }}" :active="request()->routeIs('admin.registro-servicios')">
+                            {{ __('Registro Servicios') }}
+                        </x-nav-link>
+
                     @endif
 
                     {{-- medico links --}}
