@@ -22,15 +22,23 @@ class RegistroServiciosController extends Controller
             'medico_id' => 'nullable|exists:users,id'
         ]);
 
-        // Verifica que el usuario seleccionado sea un Médico
-        $medico = User::find($validated['medico_id']);
-        if (!$medico->isMedico()) {
-            return response()->json(['error' => 'El usuario seleccionado no es un médico'], 422);
+        // Verifica si medico_id es proporcionado y, de ser así, que el usuario sea un Médico
+        if (!is_null($validated['medico_id'])) {
+            $medico = User::find($validated['medico_id']);
+            if (!$medico || !$medico->isMedico()) {
+                return response()->json(['error' => 'El usuario seleccionado no es un médico'], 422);
+            }
         }
 
-        // Crear el servicio
-        $servicio = Servicios::create($validated);
+        // Crear el servicio con los datos validados
+        $servicio = Servicios::create([
+            'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'],
+            'precio' => $validated['precio'],
+            'medico_id' => $validated['medico_id'] // Puede ser null y está bien
+        ]);
 
-        return response()->back()->with('success', 'Servicio creado correctamente');
+        return redirect()->back()->withInput();
+        
     }
 }

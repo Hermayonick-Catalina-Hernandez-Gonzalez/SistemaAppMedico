@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
     </x-slot>
 
     <div class="mt-6 dark:bg-gray-800 p-6 rounded-lg shadow">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Citas Medicas</h3>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lista de usuarios Pacientes</h3>
         {{-- Buscador --}}
         <div class="flex justify-between items-center mb-4">
             <input type="text" placeholder="Buscar por nombre de paciente..."
