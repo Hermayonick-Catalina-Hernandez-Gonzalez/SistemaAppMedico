@@ -34,14 +34,15 @@ use Illuminate\Support\Facades\Auth;
                         <td class="py-3 px-6 text-left">
                             <div class="flex space-x-2">
                                 <a href=""
-                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    class="text-blue-500 dark:text-blue-500 hover:text-blue-700 ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                     {{ __('Modificar') }}
                                 </a>
-                                <a href="{{--{{ route('medico.consultas') }} --}}"
-                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                <a href="{{-- {{ route('medico.consultas') }} --}}"
+                                    class="text-red-500 dark:text-red-500 hover:text-red-700 ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                     {{ __('Eliminar') }}
                                 </a>
                             </div>
+
                         </td>
                     </tr>
                 </tbody>
