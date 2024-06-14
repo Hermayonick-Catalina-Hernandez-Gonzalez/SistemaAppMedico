@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Auth;
             </table>
         </div>
     </div>
-    <!--Contenido de la tabla de Usuarios Médicos-->
+    <!--Contenido de la tabla de Médicos-->
     <div class="mt-6 dark:bg-gray-800 p-6 rounded-lg shadow">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lista de usuarios Médicos</h3>
         {{-- Buscador --}}
@@ -71,7 +71,6 @@ use Illuminate\Support\Facades\Auth;
                         <th class="py-3 px-6 text-left">Nombre</th>
                         <th class="py-3 px-6 text-left">Apellido</th>
                         <th class="py-3 px-6 text-left">Teléfono</th>
-                        <th class="py-3 px-6 text-left">Rol</th>
                         <th class="py-3 px-6 text-left">Acciones</th>
                     </tr>
                 </thead>
@@ -82,8 +81,7 @@ use Illuminate\Support\Facades\Auth;
                         <tr class="border-b border-gray-200 dark:border-gray-700">
                             <td class="py-3 px-6 text-left">{{ $medico->nombre}}</td>
                             <td class="py-3 px-6 text-left">{{ $medico->apellido}}</td>
-                            <td class="py-3 px-6 text-left">{{ $medico->telefono}}</td>
-                            <td class="py-3 px-6 text-left">{{ $medico->role}}</td>                        
+                            <td class="py-3 px-6 text-left">{{ $medico->telefono}}</td>                        
                             <td class="py-3 px-6 text-left">
                                 <div class="flex space-x-2">
                                     <a href=""
@@ -102,9 +100,9 @@ use Illuminate\Support\Facades\Auth;
             </table>
         </div>
     </div>
-    <!--Contenido de la tabla de Usuarios Secretarios-->
+    <!--Contenido de la tabla de Secretario-->
     <div class="mt-6 dark:bg-gray-800 p-6 rounded-lg shadow">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lista de usuarios Secretarios</h3>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lista de usuarios Secretario</h3>
         {{-- Buscador --}}
         <div class="flex justify-between items-center mb-4">
             <input type="text" placeholder="Buscar por nombre de paciente..."
@@ -119,7 +117,6 @@ use Illuminate\Support\Facades\Auth;
                         <th class="py-3 px-6 text-left">Nombre</th>
                         <th class="py-3 px-6 text-left">Apellido</th>
                         <th class="py-3 px-6 text-left">Teléfono</th>
-                        <th class="py-3 px-6 text-left">Rol</th>
                         <th class="py-3 px-6 text-left">Acciones</th>
                     </tr>
                 </thead>
@@ -130,8 +127,7 @@ use Illuminate\Support\Facades\Auth;
                         <tr class="border-b border-gray-200 dark:border-gray-700">
                             <td class="py-3 px-6 text-left">{{ $secretario->nombre}}</td>
                             <td class="py-3 px-6 text-left">{{ $secretario->apellido}}</td>
-                            <td class="py-3 px-6 text-left">{{ $secretario->telefono}}</td>
-                            <td class="py-3 px-6 text-left">{{ $secretario->role}}</td>                        
+                            <td class="py-3 px-6 text-left">{{ $secretario->telefono}}</td>                        
                             <td class="py-3 px-6 text-left">
                                 <div class="flex space-x-2">
                                     <a href=""

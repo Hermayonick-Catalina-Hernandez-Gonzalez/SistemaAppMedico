@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <!-- Te da la bienvenida con el nombre del usuario -->
-                    {{ __('Bienvenido Medico' . Auth::user()->nombre . ' ' . Auth::user()->apellido . '!') }}
+                    {{ __('Bienvenido Medico ' . Auth::user()->nombre . ' ' . Auth::user()->apellido . '!') }}
                 </div>
             </div>
 
@@ -40,11 +40,11 @@ use Illuminate\Support\Facades\Auth;
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex space-x-2">
                                         <a href=""
-                                            class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            class="text-blue-500 dark:text-blue-500 ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                             {{ __('Confirmar Cita') }}
                                         </a>
                                         <a href="{{--{{ route('medico.consultas') }} --}}"
-                                            class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            class="text-blue-500 dark:text-blue-500 ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                             {{ __('Generar Cita') }}
                                         </a>
                                     </div>

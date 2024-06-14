@@ -34,8 +34,8 @@
                                 <td class="py-3 px-6 text-left">Consulta General</td>
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex space-x-2">
-                                        <button class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full">Modificar Cita</button>
-                                        <button class="bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded-full">Cancelar Cita</button>
+                                        <button class="bg-green-500 hover:bg-green-700 text-blue-500 hover:text-blue-700 px-4 py-2 rounded-full">Modificar Cita</button>
+                                        <button class="bg-purple-500 hover:bg-purple-700 text-red-500 hover:text-red-700 px-4 py-2 rounded-full">Cancelar Cita</button>
                                     </div>
                                 </td>
                             </tr>
