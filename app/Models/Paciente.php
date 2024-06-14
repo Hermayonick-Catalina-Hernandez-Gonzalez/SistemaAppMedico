@@ -10,6 +10,8 @@ class Paciente extends Model
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'pacientes';
+
     /**
      * The attributes that are mass assignable.
      * 
