@@ -44,6 +44,15 @@ Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
 //* Rutas para el administrador
 Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
     Route::get('/admin/dashboard', [AdministradorController::class, 'index'])->name('admin.dashboard'); //* Vista principal del administrador
+    /**
+     * Rutas para modificar la información de los médicos
+     *
+     */
+    Route::get('/admin/medicos/{medico}/edit', [MedicoController::class, 'edit'])->name('medicos.edit'); //* Vista para editar médicos
+    Route::patch('/admin/medicos/{medico}', [MedicoController::class, 'update'])->name('medicos.update'); //* PATCH a actualizar médicos
+    Route::delete('/admin/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy'); //* DELETE a eliminar médicos
+
+
     Route::get('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'index'])->name('admin.registro-pacientes'); //* Vista para registrar pacientes
     Route::post('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'registro_paciente'])->name('admin.registro-pacientes.store'); //* POST a registrar pacientes a BD
     Route::get('/admin/registro-medicos', [RegistroMedicosADMINController::class, 'index'])->name('admin.registro-medicos'); //* Vista para registrar médicos

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Http\Request;
