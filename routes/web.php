@@ -6,6 +6,7 @@ use App\Http\Controllers\ConsultasSECRETARIOController;
 use App\Http\Controllers\CrearCitasMEDICOController;
 use App\Http\Controllers\CrearCitasSecretarioController;
 use App\Http\Controllers\Medico\MedicoController;
+use App\Http\Controllers\Paciente\PacienteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistroMedicosADMINController;
 use App\Http\Controllers\RegistroPacientesADMINController;
@@ -51,7 +52,18 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
     Route::get('/admin/medicos/{medico}/edit', [MedicoController::class, 'edit'])->name('medicos.edit'); //* Vista para editar médicos
     Route::patch('/admin/medicos/{medico}', [MedicoController::class, 'update'])->name('medicos.update'); //* PATCH a actualizar médicos
     Route::delete('/admin/medicos/{medico}', [MedicoController::class, 'destroy'])->name('medicos.destroy'); //* DELETE a eliminar médicos
-
+    /**
+     * Rutas para modificar la información de los secretarios
+     */
+    Route::get('/admin/secretarios/{secretario}/edit', [SecretarioController::class, 'edit'])->name('secretarios.edit'); //* Vista para editar secretarios
+    Route::patch('/admin/secretarios/{secretario}', [SecretarioController::class, 'update'])->name('secretarios.update'); //* PATCH a actualizar secretarios
+    Route::delete('/admin/secretarios/{secretario}', [SecretarioController::class, 'destroy'])->name('secretarios.destroy'); //* DELETE a eliminar secretarios
+    /**
+     * Rutas para modificar la información de los pacientes
+     */
+    Route::get('/admin/pacientes/{paciente}/edit', [PacienteController::class, 'edit'])->name('pacientes.edit'); //* Vista para editar pacientes
+    Route::patch('/admin/pacientes/{paciente}', [PacienteController::class, 'update'])->name('pacientes.update'); //* PATCH a actualizar pacientes
+    Route::delete('/admin/pacientes/{paciente}', [PacienteController::class, 'destroy'])->name('pacientes.destroy'); //* DELETE a eliminar pacientes
 
     Route::get('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'index'])->name('admin.registro-pacientes'); //* Vista para registrar pacientes
     Route::post('/admin/registro-pacientes', [RegistroPacientesADMINController::class, 'registro_paciente'])->name('admin.registro-pacientes.store'); //* POST a registrar pacientes a BD
