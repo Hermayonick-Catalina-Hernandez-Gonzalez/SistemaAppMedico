@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Auth;
                         <tr class="border-b border-gray-200 dark:border-gray-700">
                             <td class="py-3 px-6 text-left">{{ $paciente->nombre}}</td>
                             <td class="py-3 px-6 text-left">{{ $paciente->apellido}}</td>
-                            <td class="py-3 px-6 text-left">{{ $paciente->telefono}}</td>                        
+                            <td class="py-3 px-6 text-left">{{ $paciente->telefono}}</td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex space-x-2">
                                     <a href="{{ route('pacientes.edit', $paciente->id) }}"
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Auth;
                                     <form action="{{ route('pacientes.destroy', $paciente->id) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar este paciente?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        <button type="submit" class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 text-black">
                                             {{ __('Eliminar') }}
                                         </button>
                                     </form>
@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\Auth;
                         <tr class="border-b border-gray-200 dark:border-gray-700">
                             <td class="py-3 px-6 text-left">{{ $medico->nombre}}</td>
                             <td class="py-3 px-6 text-left">{{ $medico->apellido}}</td>
-                            <td class="py-3 px-6 text-left">{{ $medico->telefono}}</td>                        
+                            <td class="py-3 px-6 text-left">{{ $medico->telefono}}</td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex space-x-2">
                                     <a href="{{ route('medicos.edit', $medico->id) }}"
@@ -94,7 +94,7 @@ use Illuminate\Support\Facades\Auth;
                                     <form action="{{ route('medicos.destroy', $medico->id) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar este médico?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        <button type="submit" class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 text-black">
                                             {{ __('Eliminar') }}
                                         </button>
                                     </form>
@@ -133,17 +133,17 @@ use Illuminate\Support\Facades\Auth;
                         <tr class="border-b border-gray-200 dark:border-gray-700">
                             <td class="py-3 px-6 text-left">{{ $secretario->nombre}}</td>
                             <td class="py-3 px-6 text-left">{{ $secretario->apellido}}</td>
-                            <td class="py-3 px-6 text-left">{{ $secretario->telefono}}</td>                        
+                            <td class="py-3 px-6 text-left">{{ $secretario->telefono}}</td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex space-x-2">
                                     <a href="{{ route('secretarios.edit', $secretario->id) }}"
                                         class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-grey uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                         {{ __('Modificar') }}
                                     </a>
-                                    <a href="{{ route('secretarios.destroy', $secretario->id) }}"
-                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md     font-semibold text-xs text-grey uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                    {{ __('Eliminar') }}
-                                    </a>
+                                    <button type="submit" class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 text-black">
+                                        {{ __('Eliminar') }}
+                                    </button>
+
                                 </div>
                             </td>
                         </tr>
