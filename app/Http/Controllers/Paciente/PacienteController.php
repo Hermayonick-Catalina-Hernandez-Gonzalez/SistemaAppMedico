@@ -29,13 +29,12 @@ class PacienteController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'fecha_nacimiento' => 'required|date',
             'telefono' => 'required|string|max:15',
             'email' => 'required|email|max:255',
         ]);
 
         $paciente = Paciente::findOrFail($id);
-        $paciente->update($request->only('nombre', 'apellido', 'fecha_nacimiento', 'telefono', 'email'));
+        $paciente->update($request->only('nombre', 'apellido', 'telefono', 'email'));
 
         return redirect()->route('admin.dashboard')->with('success', 'Paciente actualizado correctamente');
     }
