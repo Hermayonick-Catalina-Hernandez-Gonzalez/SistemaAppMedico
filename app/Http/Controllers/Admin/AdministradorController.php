@@ -11,9 +11,9 @@ class AdministradorController extends Controller
 {
     public function index()
     {
-        $pacientes = Paciente::all(); // Obtener todos los pacientes
-        $medicos = User::where('role', User::ROL_MEDICO)->with('medico')->get(); // Extrae sólo a los usuarios con el Role: Médico
-        $secretarios = User::where('role', User::ROL_SECRETARIO)->with('secretario')->get(); // Extrae sólo a los usuarios con el Role: Secretario
+        $pacientes = Paciente::paginate(7); // Obtener todos los pacientes
+        $medicos = User::where('role', User::ROL_MEDICO)->paginate(7);
+        $secretarios = User::where('role', User::ROL_SECRETARIO)->paginate(7);
         return view('admin.dashboard', compact('pacientes', 'medicos', 'secretarios'));
     }
 }
