@@ -10,6 +10,12 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <form method="POST" action="{{ route('admin.registro-servicios') }}">
                     @csrf
+                    <!-- Agregar imagen del servicio -->
+                    <div>
+                        <x-input-label for="imagen" :value="__('Imagen del servicio*')" />
+                        <x-text-input id="imagen" class="block mt-1 w-full" type="file" name="imagen" accept="image/jpeg, image/png, image/csv" autofocus autocomplete="imagen" />
+                        <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
+                    </div>
                     <!-- Nombre del servicio -->
                     <div>
                         <x-input-label for="nombre" :value="__('Nombre del servicio*')" />

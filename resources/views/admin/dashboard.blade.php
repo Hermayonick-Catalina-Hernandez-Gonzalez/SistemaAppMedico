@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lista de usuarios Pacientes</h3>
         {{-- Buscador --}}
         <div class="flex justify-between items-center mb-4">
-            <input type="text" placeholder="Buscar por nombre de paciente..."
+            <input type="text" id="pacientes_search" placeholder="Buscar por nombre de paciente..."
                 class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
         </div>
         {{-- Tabla --}}
@@ -163,3 +163,38 @@ use Illuminate\Support\Facades\Auth;
     </div>
 </x-app-layout>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        function fetch_data(page, section, query) {
+            $.ajax({
+                url: "/fetch-data",
+                method: "GET",
+                data: {
+                    page: page,
+                    section: section,
+                    query: query
+                },
+                success: function(data) {
+                    $('#' + section + '_table').html(data);
+                }
+            });
+        }
+
+        // Paginación
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            let section = $(this).closest('table').data('section');
+            let query = $('#' + section + '_search').val();
+            fetch_data(page, section, query);
+        });
+
+        // Búsqueda en tiempo real
+        $('input[type="text"]').on('keyup', function() {
+            let section = $(this).data('section');
+            let query = $(this).val();
+            fetch_data(1, section, query);
+        });
+    });
+</script>
