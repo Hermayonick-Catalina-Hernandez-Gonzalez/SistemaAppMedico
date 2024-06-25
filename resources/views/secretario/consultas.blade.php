@@ -34,8 +34,14 @@
                                 <td class="py-3 px-6 text-left">Consulta General</td>
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex space-x-2">
-                                        <button class="bg-green-500 hover:bg-green-700 text-blue-500 hover:text-blue-700 px-4 py-2 rounded-full">Modificar Cita</button>
-                                        <button class="bg-purple-500 hover:bg-purple-700 text-red-500 hover:text-red-700 px-4 py-2 rounded-full">Cancelar Cita</button>
+                                        <a href=""
+                                            class="text-blue-500 dark:text-blue-500 ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            {{ __('Modificar Cita') }}
+                                        </a>
+                                        <a href="{{--{{ route('medico.consultas') }} --}}"
+                                            class="text-blue-500 dark:text-blue-500 ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            {{ __('Cancelar Cita') }}
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
