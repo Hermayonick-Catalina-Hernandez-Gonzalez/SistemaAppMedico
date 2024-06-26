@@ -1,49 +1,45 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="es">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <div class="flex justify-center mb-4">
-            <img src="{{ asset('imagenes/logo2.png') }}" alt="Logo" class="h-30 w-auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./imagenes/icono.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>Login</title>
+</head>
+
+<body class="flex items-center justify-center" style="background-image: url('imagenes/Login.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; height: 100vh; margin: 0; padding: 0;">
+    <div class="w-full max-w-lg">
+        <div class="logo mb-4 flex justify-center">
+            <img src="imagenes/Logo.png" alt="Logo" class="h-32">
         </div>
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Correo')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="mb-6 flex items-center bg-white bg-opacity-20 rounded-md shadow-sm">
+                <img src="imagenes/usuario.png" alt="correo Icon" class="w-8 h-8 ml-4"> <!-- Aumentar el tamaño del icono -->
+                <input id="email" type="email" name="email" class="flex-grow px-4 py-3 bg-transparent border-none rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder-gray-500 text-lg" required autofocus autocomplete="username"> <!-- Aumentar el padding y tamaño de fuente -->
+            </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Contraseña')" />
+            <div class="mb-6 flex items-center bg-white bg-opacity-20 rounded-md shadow-sm">
+                <img src="imagenes/contraseña.png" alt="Password Icon" class="w-8 h-8 ml-4"> <!-- Aumentar el tamaño del icono -->
+                <input id="password" type="password" name="password" class="flex-grow px-4 py-3 bg-transparent border-none rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder-gray-500 text-lg" required autocomplete="current-password"> <!-- Aumentar el padding y tamaño de fuente -->
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            @error('email')
+                <div class="mt-2 text-red-500 text-sm">{{ $message }}</div>
+            @enderror
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Recordar la próxima vez') }}</span>
-            </label>
-        </div>
+            @error('password')
+                <div class="mt-2 text-red-500 text-sm">{{ $message }}</div>
+            @enderror
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('¿Olvidaste tu contraseña?') }}
-                </a>
-            @endif
+            <div class="flex-grow flex items-center justify-center mt-8">
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-black bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Iniciar sesión</button> <!-- Aumentar el tamaño del botón -->
+            </div>
+        </form>
+    </div>
+</body>
 
-            <x-primary-button class="ms-3">
-                {{ __('Iniciar Sesión') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

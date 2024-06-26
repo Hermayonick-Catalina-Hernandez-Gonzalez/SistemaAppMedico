@@ -1,17 +1,9 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <!-- Te da la bienvenida con el nombre del usuario -->
-                    {{ __('Bienvenido Secretario ' . Auth::user()->nombre . ' ' . Auth::user()->apellido . '!') }}
-                </div>
-            </div>
-
-            <div class="mt-6 dark:bg-gray-800 p-6 rounded-lg shadow">
+            <div class="mt-6 p-6 rounded-lg shadow">
                 <div class="flex justify-between items-center mb-4">
-                    <input type="text" placeholder="Buscar servicio..."
-                        class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    <input type="text" placeholder="Buscar servicio..." class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                 </div>
             </div>
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
