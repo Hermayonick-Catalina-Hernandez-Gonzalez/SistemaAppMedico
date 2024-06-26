@@ -61,6 +61,9 @@
                         <x-nav-link href="{{ route('secretario.consultas') }}" :active="request()->routeIs('secretario.consultas')" class="text-black">
                             {{ __('Citas Agendadas') }}
                         </x-nav-link>
+                        <x-nav-link  href="{{route('secretario.pagos')}}" :active="request()->routeIs('secretario.pagos')" class="text-black">
+                            {{ __('Pagos De Consultas') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
