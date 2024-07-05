@@ -116,62 +116,69 @@
                     </div>
                     <div class="shadow w-full rounded-lg bg-white overflow-hidden w-full block p-8">
                         <h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Añadir cita</h2>
-                        <div class="mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Paciente</label>
-                            <input
-                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                type="text" x-model="event_title">
-                        </div>
-                        <div class="mb-4">
-                            <label for="time"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccionar hora:</label>
-                            <div class="flex">
-                                <input type="time" id="time"
-                                    class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    min="09:00" max="18:00" value="09:00" x-model="event_time">
-                                <input type="date" id="date"
-                                    class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    :value="new Date(year, month, date).toISOString().split('T')[0]"
-                                    x-model="event_date">
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Servicio</label>
-                            <input
-                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                type="text" x-model="event_servicio">
-                        </div>
-                        <div class="mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Descripción</label>
-                            <textarea
-                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                x-model="event_descripcion"></textarea>
-                        </div>
-                        <div class="inline-block w-64 mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Selecciona  Color</label>
-                            <div class="relative">
-                                <select @change="event_theme = $event.target.value;" x-model="event_theme"
-                                    class="block appearance-none w-full bg-gray-200 border-2 border-gray-200 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-gray-700">
-                                    <template x-for="(theme, index) in themes">
-                                        <option :value="theme.value" x-text="theme.label"></option>
-                                    </template>
+                        <!-- Form para mandar datos a la BD-->
+                        <form method="post" action="{{ route('secretario.crear-cita') }}">
+                            @csrf 
+                            <div class="mb-4">
+                                <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Paciente</label>
+                                <select
+                                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                    name="pacientes" x-model="event_title" required>
+                                    @foreach($pacientes as $paciente)
+                                        <option value="{{ $paciente->nombre }}">{{ $paciente->nombre }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="mt-8 text-right">
-                            <button type="button"
-                                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg"
-                                @click="openEventModal = !openEventModal">Cancelar
-                            </button>
-                            <button type="button"
-                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg"
-                                @click="addEvent()">Guardar cita
-                            </button>
-                        </div>
+                            <div class="mb-4">
+                                <label for="time"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccionar hora:</label>
+                                <div class="flex">
+                                    <input type="time" id="time"
+                                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        min="09:00" max="18:00" value="09:00" name="hora" x-model="event_time" required>
+                                    <input type="date" id="date"
+                                        class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        :value="new Date(year, month, date).toISOString().split('T')[0]"
+                                        name="fecha" x-model="event_date" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Servicio</label>
+                                <input
+                                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                    type="text" name="servicio" x-model="event_servicio" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Descripción</label>
+                                <textarea
+                                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                    name="Descripcion" x-model="event_descripcion" required></textarea>
+                            </div>
+                            <div class="inline-block w-64 mb-4">
+                                <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Selecciona Color</label>
+                                <div class="relative">
+                                    <select x-model="event_theme"
+                                        class="block appearance-none w-full bg-gray-200 border-2 border-gray-200 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-gray-700">
+                                        <template x-for="(theme, index) in themes">
+                                            <option :value="theme.value" x-text="theme.label"></option>
+                                        </template>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-8 text-right">
+                                <button type="button"
+                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg"
+                                    @click="openEventModal = !openEventModal">Cancelar
+                                </button>
+                                <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg"
+                                    @click="addEvent()">Guardar cita
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
         <script>
             function app() {
                 return {
