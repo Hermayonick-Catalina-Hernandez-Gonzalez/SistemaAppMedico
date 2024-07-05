@@ -82,7 +82,8 @@ Route::middleware(['auth', 'SecretarioMiddleware'])->group(function(){
     Route::get('/secretario/dashboard', [SecretarioController::class, 'index'])->name('secretario.dashboard'); //* Vista principal del secretario
     Route::get('/secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'index'])->name('secretario.registro-pacientes'); //* Vista para registrar pacientes
     Route::post('secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'registro_paciente'])->name('secretario.registro-pacientes.store'); //* POST a registrar pacientes a BD
-    Route::get('/secretario/consultas', [ConsultasSECRETARIOController::class, 'index'])->name('secretario.consultas'); //* Vista para consultar pacientes
+    Route::get('/secretario/consultas', [CrearCitasSecretarioController::class, 'index'])->name('secretario.consultas'); //* Vista para consultar pacientes
     Route::get('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'index'])->name('secretario.crear-cita'); //* Vista para crear citas
     Route::get('/secretario/pagos', [PagosController::class, 'index'])->name('secretario.pagos');//* Vista para pagos
 });
+
