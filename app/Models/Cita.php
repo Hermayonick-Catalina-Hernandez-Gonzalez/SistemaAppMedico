@@ -12,7 +12,8 @@ class Cita extends Model
     protected $fillable = [
         'pacientes',
         'hora',
-        'servicio',
         'fecha',
+        'servicio',
+        'Descripcion',
     ];
 }
