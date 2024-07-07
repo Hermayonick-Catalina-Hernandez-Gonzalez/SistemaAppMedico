@@ -1,11 +1,11 @@
 <section class="space-y-6">
     <header>
         <!-- Titulo del card -->
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-gray-900 ">
             {{ __('Eliminar Cuenta') }}
         </h2>
         <!-- Descripción del card -->
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-1 text-sm text-gray-600 ">
             {{ __('Una vez que tu cuenta sea eliminada, todos sus recursos y datos serán eliminados permanentemente. Antes de eliminar tu cuenta, por favor descarga cualquier dato o información que desees conservar.') }}
         </p>
     </header>
@@ -20,11 +20,11 @@
             @csrf
             @method('delete')
 
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h2 class="text-lg font-medium text-gray-900 ">
                 {{ __('¿Estás seguro que deseas eliminar tu cuenta?') }}
             </h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <p class="mt-1 text-sm text-gray-600">
                 {{ __('Una vez que tu cuenta sea eliminada, todos sus recursos y datos serán eliminados permanentemente. Por favor ingresa tu contraseña para confirmar que deseas eliminar tu cuenta permanentemente') }}
             </p>
 

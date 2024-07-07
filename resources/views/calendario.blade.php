@@ -118,7 +118,7 @@
                         <h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Añadir cita</h2>
                         <!-- Form para mandar datos a la BD-->
                         <form method="post" action="{{ route('secretario.crear-cita') }}">
-                            @csrf 
+                            @csrf
                             <div class="mb-4">
                                 <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Paciente</label>
                                 <select
@@ -131,13 +131,13 @@
                             </div>
                             <div class="mb-4">
                                 <label for="time"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccionar hora:</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 ">Seleccionar hora:</label>
                                 <div class="flex">
                                     <input type="time" id="time"
-                                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 "
                                         min="09:00" max="18:00" value="09:00" name="hora" x-model="event_time" required>
                                     <input type="date" id="date"
-                                        class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5 "
                                         :value="new Date(year, month, date).toISOString().split('T')[0]"
                                         name="fecha" x-model="event_date" required>
                                 </div>

@@ -16,10 +16,12 @@ use App\Http\Controllers\RegistroSecretarioADMINController;
 use App\Http\Controllers\RegistroServiciosController;
 use App\Http\Controllers\Secretario\SecretarioController;
 use App\Http\Controllers\PagosController;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\RegistroProductoADMINController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta principal para iniciar sesión
-Route::get('/', function() {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -31,11 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 //* Rutas para el medico
-Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
+Route::middleware(['auth', 'MedicoMiddleware'])->group(function () {
     Route::get('dashboard', [MedicoController::class, 'index'])->name('dashboard'); //* Vista principal del médico
     Route::get('registro-pacientes', [RegistroPacientesMEDICOController::class, 'index'])->name('registro-pacientes'); //* Vista para registrar pacientes
     Route::post('registro-pacientes', [RegistroPacientesMEDICOController::class, 'registro_paciente'])->name('registro-pacientes.store'); //* POST a registrar pacientes a BD
@@ -44,7 +46,7 @@ Route::middleware(['auth', 'MedicoMiddleware'])->group(function(){
 });
 
 //* Rutas para el administrador
-Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
+Route::middleware(['auth', 'AdministradorMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdministradorController::class, 'index'])->name('admin.dashboard'); //* Vista principal del administrador
     /**
      * Rutas para modificar la información de los médicos
@@ -74,17 +76,22 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function(){
     Route::post('/admin/registro-secretarios', [RegistroSecretarioADMINController::class, 'registro_secretarios'])->name('admin.registro-secretarios.store'); //* POST a registrar secretarios a BD
     Route::get('/admin/registro-servicios', [RegistroServiciosController::class, 'index'])->name('admin.registro-servicios'); //* Vista para registrar servicios
     Route::post('/admin/registro-servicios', [RegistroServiciosController::class, 'store'])->name('admin.registro-servicios.store'); //* POST a registrar servicios a BD
+
+    //Productos
+
+    Route::get('/admin/registro-producto', [RegistroProductoADMINController::class, 'index'])->name('admin.registro-productos');
+    Route::post('/admin/registro-productos', [RegistroProductoADMINController::class, 'store'])->name('admin.registro-productos');
 });
 
 
 //* Rutas para el secretario
-Route::middleware(['auth', 'SecretarioMiddleware'])->group(function(){
+Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
     Route::get('/secretario/dashboard', [SecretarioController::class, 'index'])->name('secretario.dashboard'); //* Vista principal del secretario
     Route::get('/secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'index'])->name('secretario.registro-pacientes'); //* Vista para registrar pacientes
     Route::post('secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'registro_paciente'])->name('secretario.registro-pacientes.store'); //* POST a registrar pacientes a BD
-    Route::get('/secretario/consultas', [CrearCitasSecretarioController::class, 'index'])->name('secretario.consultas'); //* Vista para consultar pacientes
+    Route::get('/secretario/consultas', [ConsultasSecretarioController::class, 'index'])->name('secretario.consultas'); //* Vista para consultar pacientes
     Route::get('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'index'])->name('secretario.crear-cita'); //* Vista para crear citas
     Route::post('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'store'])->name('secretario.crear-cita.store'); //* POST a crear citas
-    Route::get('/secretario/pagos', [PagosController::class, 'index'])->name('secretario.pagos');//* Vista para pagos
+    Route::get('/secretario/pagos', [PagosController::class, 'index'])->name('secretario.pagos'); //* Vista para pagos
+    Route::get('/secretario/producto', [ProductosController::class, 'index'])->name('secretario.medicamentos'); //* Vista para productos
 });
-

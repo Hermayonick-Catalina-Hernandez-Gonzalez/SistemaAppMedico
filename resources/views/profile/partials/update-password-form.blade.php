@@ -1,12 +1,12 @@
 <section>
     <header>
         <!-- Titulo del card -->
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-gray-900 ">
             {{ __('Actualizar Contraseña') }}
         </h2>
         <!-- Descripción del card -->
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Asegurate de que tu cuenta esté usando una contraseña larga y aleatoria para mantenerla segura.') }} 
+        <p class="mt-1 text-sm text-gray-600">
+            {{ __('Asegurate de que tu cuenta esté usando una contraseña larga y aleatoria para mantenerla segura.') }}
         </p>
     </header>
 
@@ -41,7 +41,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
+                    class="text-sm text-gray-600 "
                 >{{ __('La contraseña ha sido actualizada con éxito!') }}</p>
             @endif
         </div>

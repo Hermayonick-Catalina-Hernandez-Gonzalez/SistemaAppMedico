@@ -36,7 +36,7 @@
             @enderror
 
             <div class="flex-grow flex items-center justify-center mt-8">
-                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-black bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Iniciar sesión</button> <!-- Aumentar el tamaño del botón -->
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Iniciar sesión</button> <!-- Aumentar el tamaño del botón -->
             </div>
         </form>
     </div>

@@ -1,13 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Medicos</title>
+    <!-- Incluye Tailwind CSS desde CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Registro de usuarios Médicos') }}
+        <h2 class="font-semibold text-xl text-gray-800  leading-tight">
+            {{ __('Registro Médicos') }}
         </h2>
     </x-slot>
 
     <div class="py-12 flex justify-center">
         <div class="max-w-lg w-full sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <form method="POST" action="{{ route('admin.registro-medicos') }}">
                     @csrf
                     <!-- Nombre -->
@@ -99,5 +112,8 @@
             </div>
         </div>
     </div>
-    
+
 </x-app-layout>
+</body>
+
+</html>
