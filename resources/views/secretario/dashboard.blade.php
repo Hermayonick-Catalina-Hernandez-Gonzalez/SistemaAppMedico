@@ -16,7 +16,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="mt-6 p-6 rounded-lg shadow">
                     <div class="flex justify-between items-center mb-4">
-                        <input type="text" placeholder="Buscar servicio..."
+                        <input type="text" id="search" placeholder="Buscar servicio..."
                             class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
                 </div>
@@ -85,6 +85,22 @@
             </div>
         </div>
     </x-app-layout>
+
+    <script>
+        document.getElementById('search').addEventListener('input', function () {
+            let filter = this.value.toLowerCase();
+            let services = document.querySelectorAll('.service');
+
+            services.forEach(function (service) {
+                let text = service.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    service.style.display = "";
+                } else {
+                    service.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

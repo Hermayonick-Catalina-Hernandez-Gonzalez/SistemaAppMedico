@@ -18,7 +18,7 @@
                     <h3 class="text-lg font-semibold text-gray-900 ">Citas Medicas</h3>
                     <!-- Buscador -->
                     <div class="flex justify-between items-center mb-4">
-                        <input type="text" placeholder="Buscar por nombre de paciente..."
+                        <input type="text" id="search" placeholder="Buscar por nombre de paciente..."
                             class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
                     <!-- Tabla -->
@@ -60,6 +60,22 @@
             </div>
         </div>
     </x-app-layout>
+
+    <script>
+        document.getElementById('search').addEventListener('input', function () {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll('#appointmentsTable tbody tr');
+
+            rows.forEach(function (row) {
+                let text = row.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
