@@ -78,7 +78,6 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function () {
     Route::post('/admin/registro-servicios', [RegistroServiciosController::class, 'store'])->name('admin.registro-servicios.store'); //* POST a registrar servicios a BD
 
     //Productos
-
     Route::get('/admin/registro-productos', [RegistroProductoADMINController::class, 'index'])->name('admin.registro-productos');
     Route::post('/admin/registro-productos', [RegistroProductoADMINController::class, 'store'])->name('admin.registro-productos');
 });
