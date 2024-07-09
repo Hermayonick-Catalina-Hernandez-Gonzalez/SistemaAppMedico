@@ -18,45 +18,51 @@
             </h2>
         </x-slot>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="mt-6  p-6 rounded-lg shadow">
-                    <!-- Buscador -->
-                    <div class="flex justify-between items-center mb-4">
-                        <input type="text" placeholder="Buscar por nombre del producto..."
-                            class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
-                    </div>
-                    <!-- Tabla -->
-                    <div class="overflow-x-auto flex justify-center">
-                        <table class="min-w-full bg-white  rounded-lg shadow-md">
-                            <thead>
-                                <tr
-                                    class="bg-gray-200  text-gray-600  uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-left">Producto</th>
-                                    <th class="py-3 px-6 text-left">Cantidad</th>
-                                    <th class="py-3 px-6 text-left">Precio</th>
-                                    <th class="py-3 px-6 text-left">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-600  text-sm">
-                                @foreach ($productos as $producto)
-                                    <tr class="border-b border-gray-200 ">
-                                        <td class="py-3 px-6 text-left">{{ $producto->nombre }}</td>
-                                        <td class="py-3 px-6 text-left">{{ $producto->cantidad }}</td>
-                                        <td class="py-3 px-6 text-left">{{ $producto->precio }}</td>
-                                        <td class="py-3 px-6 text-left">
-                                            <div class="flex space-x-2">
-                                                <a href="#"
-                                                    class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                    Vender
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="py-12 flex justify-center">
+            <div class="max-w-lg w-full sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                    <form method="POST" action="{{ route('admin.registro-productos') }}">
+                        @csrf
+                        <!-- Nombre -->
+                        <div>
+                            <x-input-label for="nombre" :value="__('Nombre del producto*')" />
+                            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre"
+                                :value="old('nombre')" required autofocus autocomplete="nombre" />
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+
+                         <!-- Cantidad-->
+                        <div>
+                            <x-input-label for="cantidad" :value="__('Cantidad*')" />
+                            <x-text-input id="cantidad" class="block mt-1 w-full" type="text" name="cantidad"
+                                :value="old('cantidad')" required autofocus autocomplete="cantidad" />
+                            <x-input-error :messages="$errors->get('cantidad')" class="mt-2" />
+                        </div>
+
+
+                        <!-- Fecha de Vencimiento -->
+                        <div class="mt-4">
+                            <x-input-label for="fecha_vencimiento" :value="__('Fecha de vencimiento')" />
+                            <x-text-input id="fecha_vencimiento" class="block mt-1 w-full" type="date"
+                                name="fecha_vencimiento" :value="old('fecha_vencimiento')" required autocomplete="fecha_vencimiento" />
+                            <x-input-error :messages="$errors->get('fecha_vencimiento')" class="mt-2" />
+                        </div>
+
+
+                        <!-- Precio-->
+                        <div>
+                            <x-input-label for="precio" :value="__('Precio*')" />
+                            <x-text-input id="precio" class="block mt-1 w-full" type="text" name="precio"
+                                :value="old('precio')" required autofocus autocomplete="precio" />
+                            <x-input-error :messages="$errors->get('precio')" class="mt-2" />
+                        </div>
+
+                        <div class="flex items-center justify-center mt-4">
+                            <x-primary-button class="ms-4">
+                                {{ __('Registrar') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
