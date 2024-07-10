@@ -140,7 +140,7 @@
                     <div class="overflow-x-auto flex justify-center">
                         <table id="secretarios_table" class="min-w-full bg-white rounded-lg shadow-md">
                             <thead>
-                                <tr class="bg-gray-200 -700 text-gray-600 uppercase text-sm leading-normal">
+                                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Nombre</th>
                                     <th class="py-3 px-6 text-left">Apellido</th>
                                     <th class="py-3 px-6 text-left">Teléfono</th>
@@ -180,10 +180,80 @@
                         {{ $secretarios->links() }}
                     </div>
                 </div>
+
+                <!-- Contenido de la tabla de Servicios -->
+                <div class="mt-6 bg-gray-200 p-6 rounded-lg shadow">
+                    <!-- Buscador -->
+                    <div class="flex justify-between items-center mb-4">
+                        <input type="text" id="servicio_search" placeholder="Buscar por nombre de servicio.."
+                            class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Lista de Servicios</h3>
+                    <!-- Tabla -->
+                    <div class="overflow-x-auto flex justify-center">
+                        <table id="servicios_table" class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Nombre del Servicio</th>
+                                    <th class="py-3 px-6 text-left">Precio</th>
+                                    <th class="py-3 px-6 text-left">Médico Asignado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm">
+                                @foreach ($servicios as $servicio)
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-6 text-left">{{ $servicio->nombre }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $servicio->precio }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $servicio->medico_nombre }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+
+                    </div>
+                </div>
+
+                <!-- Contenido de la tabla de Productos -->
+                <div class="mt-6 bg-gray-200 p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-900">Lista de Productos</h3>
+                     <!-- Buscador -->
+                     <div class="flex justify-between items-center mb-4">
+                        <input type="text" id="productos_search" placeholder="Buscar por nombre de servicio.."
+                            class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+                    <!-- Tabla -->
+                    <div class="overflow-x-auto flex justify-center">
+                        <table id="productos_table" class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Nombre</th>
+                                    <th class="py-3 px-6 text-left">Cantidad</th>
+                                    <th class="py-3 px-6 text-left">Fecha Vecimiento</th>
+                                    <th class="py-3 px-6 text-left">Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm">
+                                @foreach ($productos as $producto)
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-6 text-left">{{ $producto->nombre }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $producto->cantidad }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $producto->fecha_vencimiento }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $producto->precio }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </x-app-layout>
-
 </body>
 
 </html>

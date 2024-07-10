@@ -38,7 +38,6 @@
                                     <th class="py-3 px-6 text-left">Producto</th>
                                     <th class="py-3 px-6 text-left">Cantidad</th>
                                     <th class="py-3 px-6 text-left">Precio</th>
-                                    <th class="py-3 px-6 text-left">Acción</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm">
@@ -47,7 +46,6 @@
                                         <td class="py-3 px-6 text-left">{{ $producto->nombre }}</td>
                                         <td class="py-3 px-6 text-left">{{ $producto->cantidad }}</td>
                                         <td class="py-3 px-6 text-left">{{ $producto->precio }}</td>
-                                        <td class="py-3 px-6 text-left">
                                         </td>
                                     </tr>
                                 @endforeach

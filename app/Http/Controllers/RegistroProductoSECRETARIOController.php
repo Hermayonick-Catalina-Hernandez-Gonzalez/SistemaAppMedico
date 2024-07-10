@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Producto;
+use App\Models\Producto; 
 
-class RegistroProductoADMINController extends Controller
+class RegistroProductoSECRETARIOController extends Controller
 {
     public function index()
     {
-        return view('admin.registro-productos');
+        return view('secretario.registro-productos');
     }
 
     public function store(Request $request)

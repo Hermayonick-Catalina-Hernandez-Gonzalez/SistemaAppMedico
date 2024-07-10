@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
-
+use App\Models\Servicios;
 class CrearCitasSecretarioController extends Controller
 {
     public function index(Request $request)
     {
         $servicio = $request->input('servicio');
         $pacientes = Paciente::all(); // Obtener todos los pacientes
-        return view('secretario.crear-cita', compact('servicio', 'pacientes'));
+        $servicios = Servicios::all();
+        return view('secretario.crear-cita', compact('servicio', 'pacientes','servicios'));
     }
 
     public function store(Request $request)

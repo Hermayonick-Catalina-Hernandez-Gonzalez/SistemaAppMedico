@@ -62,6 +62,10 @@
                             {{ __('Citas Agendadas') }}
                         </x-nav-link>
 
+                        <x-nav-link  href="{{ route('secretario.registro-productos') }}" :active="request()->routeIs('secretario.pagos')" class="text-black">
+                            {{ __('Registrar Productos') }}
+                        </x-nav-link>
+                        
                         <x-nav-link  href="{{ route('secretario.pagos') }}" :active="request()->routeIs('secretario.pagos')" class="text-black">
                             {{ __('Pagos De Consultas') }}
                         </x-nav-link>

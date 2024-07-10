@@ -19,6 +19,7 @@ use App\Http\Controllers\PagosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\RegistroProductoADMINController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistroProductoSECRETARIOController;
 
 // Ruta principal para iniciar sesión
 Route::get('/', function () {
@@ -93,4 +94,7 @@ Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
     Route::post('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'store'])->name('secretario.crear-cita.store'); //* POST a crear citas
     Route::get('/secretario/pagos', [PagosController::class, 'index'])->name('secretario.pagos'); //* Vista para pagos
     Route::get('/secretario/producto', [ProductosController::class, 'index'])->name('secretario.medicamentos'); //* Vista para productos
+    //Productos
+    Route::get('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'index'])->name('secretario.registro-productos');
+    Route::post('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'store'])->name('secretario.registro-productos');
 });
