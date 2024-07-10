@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Secretario;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Servicios;
 
 class SecretarioController extends Controller
 {
     public function index(){
-        return view('secretario.dashboard');
+        $servicios = Servicios::all(); // Obtener todos los servicios de la base de datos
+        return view('secretario.dashboard', compact('servicios'));
     }
 
     public function edit($id)

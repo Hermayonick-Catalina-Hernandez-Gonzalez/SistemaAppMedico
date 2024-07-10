@@ -23,7 +23,7 @@
                     </div>
                     <!-- Tabla -->
                     <div class="overflow-x-auto flex justify-center">
-                        <table class="min-w-full bg-white  rounded-lg shadow-md">
+                        <table class="min-w-full bg-white  rounded-lg shadow-md" id="appointmentsTable">
                             <thead>
                                 <tr
                                     class="bg-gray-200  text-gray-600 uppercase text-sm leading-normal">
@@ -46,9 +46,9 @@
                                                 class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                                 Confirmar Cita
                                             </a>
-                                            <a href="#"
+                                            <a href="{{ route('consultas') }}"
                                                 class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                Generar Cita
+                                                Generar Consulta
                                             </a>
                                         </div>
                                     </td>

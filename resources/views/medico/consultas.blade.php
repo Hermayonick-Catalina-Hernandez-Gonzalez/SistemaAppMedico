@@ -103,22 +103,20 @@
                                     name="diagnostico" value="{{ old('diagnostico') }}">
                             </div>
 
-                            <div>
-                                <label for="solicitar_estudios"
-                                    class="block font-medium text-sm ">Solicitar estudios</label>
+                             <!-- Campo de Solicitar Estudios -->
+                             <div>
+                                <label for="solicitar_estudios" class="block font-medium text-sm">Solicitar estudios</label>
                                 <div id="estudios-container" class="flex flex-col gap-4">
                                     <div class="flex gap-4 estudio">
-                                        <input id="solicitar_estudios"
-                                            class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                            name="solicitar_estudios[]" value="{{ old('solicitar_estudios') }}"
-                                            placeholder="Estudio">
-                                        <textarea id="indicaciones_estudios"
-                                            class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                            name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar">{{ old('indicaciones_estudios') }}</textarea>
+                                        <select id="solicitar_estudios" name="solicitar_estudios[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                                            @foreach ($servicios as $servicio)
+                                                <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                        <textarea id="indicaciones_estudios" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar">{{ old('indicaciones_estudios') }}</textarea>
                                     </div>
                                 </div>
-                                <button type="button" id="add-estudio"
-                                    class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Estudio</button>
+                                <button type="button" id="add-estudio" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Estudio</button>
                             </div>
 
                             <!-- Receta -->
@@ -129,14 +127,16 @@
                                     <div class="flex gap-4 medicamento">
                                         <div class="relative w-1/4">
                                             <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="medicacion"
+                                            <select id="medicacion"
                                                 class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                                name="medicacion[]" value="{{ old('medicacion') }}"
-                                                placeholder="Medicación">
+                                                name="medicacion[]">
+                                                @foreach($productos as $producto)
+                                                    <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="relative w-1/4">
-                                            <i
-                                                class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
+                                            <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
                                             <input id="cantidad"
                                                 class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
                                                 name="cantidad[]" value="{{ old('cantidad') }}"
@@ -185,8 +185,12 @@
             <div class="flex gap-4 medicamento">
                 <div class="relative w-1/4">
                     <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                           name="medicacion[]" placeholder="Medicación">
+                    <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
+                           name="medicacion[]">
+                        @foreach($productos as $productoo)
+                            <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="relative w-1/4">
                     <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
@@ -212,10 +216,12 @@
             const container = document.getElementById('estudios-container');
             const estudioHTML = `
             <div class="flex gap-4 estudio">
-                <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                       name="solicitar_estudios[]" placeholder="Estudio">
-                <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                          name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
+                <select name="solicitar_estudios[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                    @foreach ($servicios as $servicio)
+                        <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                    @endforeach
+                </select>
+                <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar">{{ old('indicaciones_estudios') }}</textarea>
             </div>
         `;
             container.insertAdjacentHTML('beforeend', estudioHTML);

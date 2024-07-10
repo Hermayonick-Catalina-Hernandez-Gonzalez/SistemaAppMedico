@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->string('content')->nullable();
+            $table->string('content')->nullable(); // Campo para almacenar la URL o nombre del archivo de la foto
             $table->string('nombre');
             $table->text('descripcion');
             $table->decimal('precio', 8, 2);
-            $table->unsignedBigInteger('medico_id')->nullable();
+            $table->string('medico_nombre')->nullable(); // Nuevo campo para almacenar el nombre del médico
             $table->timestamps();
-
-            // Crear llave foranea que extraiga de la tabla de users aquellos que tengan el rol de médico
-            $table->foreign('medico_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

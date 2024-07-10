@@ -50,9 +50,6 @@
                             {{ __('Crear Cita') }}
                         </x-nav-link>
 
-                        <x-nav-link href="/consultas" :active="request()->routeIs('medico.consultas')" class="text-black">
-                            {{ __('Consultas') }}
-                        </x-nav-link>
                     @endif
 
                     <!-- secretario links -->
