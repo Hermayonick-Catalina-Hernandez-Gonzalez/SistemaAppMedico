@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\Servicios;
 use App\Models\User;
@@ -16,7 +17,7 @@ class CrearCitasSecretarioController extends Controller
         $pacientes = Paciente::all(); // Obtener todos los pacientes
         $servicios = Servicios::all(); // Obtener todos los servicio
         $medicos = User::where('role', User::ROL_MEDICO)->get(); // Obtener todos los médicos
-        $citas = Cita::all(); // Obtener todas las citas
+        $citas = Cita::with('medico')->get(); // Obtener todas las citas
         return view('secretario.crear-cita', compact('servicio', 'pacientes', 'servicios', 'medicos', 'citas'));
     }
 
@@ -27,6 +28,7 @@ class CrearCitasSecretarioController extends Controller
             'hora' => 'required|date_format:H:i',
             'fecha' => 'required|date',
             'servicio' => 'required|string|max:255',
+            'medico_id' => 'required|exists:users,id',
             'Descripcion' => 'required|string',
         ]);
 

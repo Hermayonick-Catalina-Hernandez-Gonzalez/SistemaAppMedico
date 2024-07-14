@@ -204,7 +204,7 @@
                                     <tr class="border-b border-gray-200">
                                         <td class="py-3 px-6 text-left">{{ $servicio->nombre }}</td>
                                         <td class="py-3 px-6 text-left">{{ $servicio->precio }}</td>
-                                        <td class="py-3 px-6 text-left">{{ $servicio->medico_nombre }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $servicio->medico->nombre }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

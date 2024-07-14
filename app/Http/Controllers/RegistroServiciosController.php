@@ -18,14 +18,13 @@ class RegistroServiciosController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
-            'medico_nombre' => 'nullable|string', // Validar el nombre del médico
+            'medico_id' => 'nullable|string' // Valida el nombre del medico.
         ]);
 
-        // Manejo de la imagen
+        // Manejo de imagen
         if ($request->hasFile('imagen')) {
             $imageName = time().'.'.$request->imagen->extension();
             $request->imagen->move(public_path('images'), $imageName);
@@ -40,9 +39,10 @@ class RegistroServiciosController extends Controller
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'],
             'precio' => $validated['precio'],
-            'medico_nombre' => $validated['medico_nombre'], // Guardar el nombre del médico
+            'medico_id' => $validated['medico_id'], // Guardar el nombre del médico
         ]);
 
         return redirect()->back()->with('success', 'Servicio registrado con éxito.');
+        
     }
 }

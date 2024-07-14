@@ -3,13 +3,25 @@
 namespace App\Http\Controllers\Medico;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cita;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedicoController extends Controller
 {
     public function index(){
-        return view('medico.dashboard');
+        if(Auth::check()) {
+            // Obtiene el id del medico logueado
+            $medicoId = Auth::user()->id;
+
+            // Filtra las citas asignadas a este médico
+            $citas = Cita::where('medico_id', $medicoId)->get();
+
+            return view('medico.dashboard', compact('citas'));
+        }
+        
+        return redirect()->route('login');
     }
 
     public function edit($id) 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('descripcion');
             $table->decimal('precio', 8, 2);
-            $table->string('medico_nombre')->nullable(); // Nuevo campo para almacenar el nombre del médico
+            $table->foreignId('medico_id')->nullable()->constrained('users')->onDelete('set null'); // Nuevo campo para almacenar el ID del médico
             $table->timestamps();
         });
     }

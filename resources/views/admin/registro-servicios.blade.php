@@ -50,11 +50,11 @@
 
                         <!-- Médicos que ofrecen dicho servicio -->
                         <div class="mt-4">
-                            <x-input-label for="medico_nombre" :value="__('Médico que puede ofrecer este servicio*')" />
-                            <select id="medico_nombre" class="block mt-1 w-full" name="medico_nombre" required>
+                            <x-input-label for="medico_id" :value="__('Médico que puede ofrecer este servicio*')" />
+                            <select id="medico_id" class="block mt-1 w-full" name="medico_id" required>
                                 <option value="">Seleccione un médico</option>
                                 @foreach($medicos as $medico)
-                                    <option value="{{ $medico->nombre }}" {{ old('medico_nombre') == $medico->nombre ? 'selected' : '' }}>
+                                    <option value="{{ $medico->id }}" {{ old('medico_id') == $medico->id ? 'selected' : '' }}>
                                         {{ $medico->nombre }}
                                     </option>
                                 @endforeach

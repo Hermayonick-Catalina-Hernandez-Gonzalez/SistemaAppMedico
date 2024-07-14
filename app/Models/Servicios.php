@@ -14,11 +14,11 @@ class Servicios extends Model
         'nombre',
         'descripcion',
         'precio',
-        'medico_nombre',
+        'medico_id',
     ];
 
     public function medico()
     {
-        return $this->belongsTo(User::class, 'medico_nombre');
+        return $this->belongsTo(User::class, 'medico_id');
     }
 }
