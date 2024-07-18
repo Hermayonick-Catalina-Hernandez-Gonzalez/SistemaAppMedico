@@ -99,3 +99,7 @@ Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
     Route::get('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'index'])->name('secretario.registro-productos');
     Route::post('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'store'])->name('secretario.registro-productos');
 });
+
+use App\Http\Controllers\ImageController;
+
+Route::get('/imagen/{id}', [ImageController::class, 'show'])->name('imagen.show');

@@ -21,14 +21,13 @@ class RegistroServiciosController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
-            'medico_id' => 'nullable|string' // Valida el nombre del medico.
+            'medico_id' => 'nullable|exists:users,id', // Valida que el ID del médico exista en la tabla users
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048' // Valida la imagen
         ]);
 
         // Manejo de imagen
         if ($request->hasFile('imagen')) {
-            $imageName = time().'.'.$request->imagen->extension();
-            $request->imagen->move(public_path('images'), $imageName);
-            $content =  $imageName;
+            $content = file_get_contents($request->file('imagen')->getRealPath()); // Obtener el contenido de la imagen como BLOB
         } else {
             $content = null;
         }
@@ -39,10 +38,10 @@ class RegistroServiciosController extends Controller
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'],
             'precio' => $validated['precio'],
-            'medico_id' => $validated['medico_id'], // Guardar el nombre del médico
+            'medico_id' => $validated['medico_id'],
         ]);
 
         return redirect()->back()->with('success', 'Servicio registrado con éxito.');
-        
     }
 }
+

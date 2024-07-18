@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash; // Importa Hash para encriptar la contraseña
 
 return new class extends Migration
 {
@@ -40,6 +42,46 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Insertar registros predefinidos en la tabla 'users'
+        DB::table('users')->insert([
+            [
+                'nombre' => 'Hermayonick',
+                'apellido' => 'Hernandez',
+                'fecha_nacimiento' => '2003-10-23',
+                'telefono' => '8341165455',
+                'email' => 'her@me.com',
+                'password' => Hash::make('hermayonick23'), // Encriptar la contraseña
+                'role' => 'Administrador',
+                'profesion' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Jesus',
+                'apellido' => 'Olazaran',
+                'fecha_nacimiento' => '2002-12-25',
+                'telefono' => '2002-12-25',
+                'email' => 'jesus@me.com',
+                'password' => Hash::make('jesus123'), // Encriptar la contraseña
+                'role' => 'Médico',
+                'profesion' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Alan',
+                'apellido' => 'Torres',
+                'fecha_nacimiento' => '2003-10-24',
+                'telefono' => '8345671234',
+                'email' => 'alan@me.com',
+                'password' => Hash::make('alan1234'), // Encriptar la contraseña
+                'role' => 'Secretario',
+                'profesion' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 
     /**
