@@ -197,6 +197,7 @@
                                     <th class="py-3 px-6 text-left">Nombre del Servicio</th>
                                     <th class="py-3 px-6 text-left">Precio</th>
                                     <th class="py-3 px-6 text-left">Médico Asignado</th>
+                                    <th class="py-3 px-6 text-left">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm">
@@ -205,6 +206,22 @@
                                         <td class="py-3 px-6 text-left">{{ $servicio->nombre }}</td>
                                         <td class="py-3 px-6 text-left">{{ $servicio->precio }}</td>
                                         <td class="py-3 px-6 text-left">{{ $servicio->medico->nombre }}</td>
+                                        <td class="py-3 px-6 text-left">
+                                        <div class="flex space-x-2">
+                                                <a href="{{ route('registro-servicios.edit', $servicio->id) }}"
+                                                class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">{{ __('Modificar')}}</a>
+                                                <form action="{{ route('registro-servicios.destroy', $servicio->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('¿Está seguro de que desea eliminar este servicio?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                        {{ __('Eliminar') }}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

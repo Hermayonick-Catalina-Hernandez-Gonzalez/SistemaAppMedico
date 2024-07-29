@@ -15,6 +15,34 @@ class RegistroServiciosController extends Controller
         return view('admin.registro-servicios', compact('medicos'));
     }
 
+    public function edit($id)
+    {
+        $servicio = Servicios::findOrFail($id);
+        return view('admin.servicios.edit', compact('servicio'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'precio' => 'required|numeric',
+        ]);
+
+        $servicio = Servicios::findOrFail($id);
+        $servicio->update($request->only('nombre', 'descripcion', 'precio'));
+
+        return redirect()->route('admin.dashboard')->with('success', 'Servicio actualizado con éxito.');
+    }
+
+    public function destroy($id)
+    {
+        $servicio = Servicios::findOrFail($id);
+        $servicio->delete();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Servicio eliminado con éxito.');
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

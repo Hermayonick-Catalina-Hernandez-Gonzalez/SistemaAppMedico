@@ -17,6 +17,7 @@ use App\Http\Controllers\RegistroServiciosController;
 use App\Http\Controllers\Secretario\SecretarioController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\RegistroEnfermeroController;
 use App\Http\Controllers\RegistroProductoADMINController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroProductoSECRETARIOController;
@@ -75,8 +76,19 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function () {
     Route::post('/admin/registro-medicos', [RegistroMedicosADMINController::class, 'registro_medico'])->name('admin.registro-medicos.store'); //* POST a registrar médicos a BD
     Route::get('/admin/registro-secretarios', [RegistroSecretarioADMINController::class, 'index'])->name('admin.registro-secretarios'); //* Vista para registrar secretarios
     Route::post('/admin/registro-secretarios', [RegistroSecretarioADMINController::class, 'registro_secretarios'])->name('admin.registro-secretarios.store'); //* POST a registrar secretarios a BD
+    /**
+     * Rutas para servicios
+     */
     Route::get('/admin/registro-servicios', [RegistroServiciosController::class, 'index'])->name('admin.registro-servicios'); //* Vista para registrar servicios
-    Route::post('/admin/registro-servicios', [RegistroServiciosController::class, 'store'])->name('admin.registro-servicios.store'); //* POST a registrar servicios a BD
+    Route::get('/admin/registro-servicios/{servicio}/edit', [RegistroServiciosController::class, 'edit'])->name('registro-servicios.edit'); //* Vista para editar servicios
+    Route::patch('/admin/registro-servicios/{servicio}', [RegistroServiciosController::class, 'update'])->name('registro-servicios.update'); //* PATCH a actualizar servicios
+    Route::delete('/admin/registro-servicios/{servicio}', [RegistroServiciosController::class, 'destroy'])->name('registro-servicios.destroy'); //* DELETE a eliminar servicios
+
+    /**
+     * Rutas para enfermeros
+     */
+    Route::get('/admin/registro-enfermeros', [RegistroEnfermeroController::class, 'index'])->name('admin.registro-enfermeros'); //* Vista para registrar enfermeros
+    Route::post('/admin/registro-enfermeros', [RegistroEnfermeroController::class, 'registro_enfermeros'])->name('admin.registro-enfermeros.store'); //* POST a registrar enfermeros a BD
 
     //Productos
     Route::get('/admin/registro-productos', [RegistroProductoADMINController::class, 'index'])->name('admin.registro-productos');
