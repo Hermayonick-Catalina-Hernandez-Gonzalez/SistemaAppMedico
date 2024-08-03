@@ -20,22 +20,20 @@
         <div class="py-12 flex justify-center">
             <div class="max-w-7xl w-full sm:px-6 lg:px-8">
                 <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('consultas') }}">
                         @csrf
                         <div class="grid grid-cols-1 gap-6">
                             <div class="relative">
-                                <label for="paciente" class="block font-medium text-sm ">Nombre del
-                                    paciente</label>
+                                <label for="paciente" class="block font-medium text-sm ">Nombre del paciente</label>
                                 <input id="paciente"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                    name="paciente" value="{{ old('paciente') }}">
+                                    name="paciente">
                             </div>
                             <div>
-                                <label for="motivo_consulta" class="block font-medium text-sm ">Motivo
-                                    de la consulta</label>
+                                <label for="motivo_consulta" class="block font-medium text-sm ">Motivo de la consulta</label>
                                 <textarea id="motivo_consulta"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                    name="motivo_consulta">{{ old('motivo_consulta') }}</textarea>
+                                    name="motivo_consulta"></textarea>
                             </div>
 
                             <div>
@@ -43,44 +41,43 @@
                                     class="block font-medium text-sm ">Notas de padecimiento</label>
                                 <textarea id="notas_padecimiento"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                    name="notas_padecimiento">{{ old('notas_padecimiento') }}</textarea>
+                                    name="notas_padecimiento"></textarea>
                             </div>
 
                             <!-- Signos vitales fields -->
                             <div>
-                                <label for="signos_vitales" class="block font-medium text-sm ">Signos
-                                    vitales</label>
+                                <label for="signos_vitales" class="block font-medium text-sm ">Signos vitales</label>
                                 <div class="flex gap-4">
                                     <div class="relative">
                                         <i class="fa fa-user absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="edad"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="edad" value="{{ old('edad') }}" placeholder="Edad">
+                                            name="edad" placeholder="Edad">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-ruler-vertical absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="talla"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="talla" value="{{ old('talla') }}" placeholder="Talla (m)">
+                                            name="talla"  placeholder="Talla (m)">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-thermometer-half absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="temperatura"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="temperatura" value="{{ old('temperatura') }}"
+                                            name="temperatura" 
                                             placeholder="Temperatura (°C)">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-weight absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="peso"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="peso" value="{{ old('peso') }}" placeholder="Peso (kg)">
+                                            name="peso"  placeholder="Peso (kg)">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-heartbeat absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="frecuencia_cardiaca"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="frecuencia_cardiaca" value="{{ old('frecuencia_cardiaca') }}"
+                                            name="frecuencia_cardiaca" 
                                             placeholder="Frecuencia (bpm)">
                                     </div>
                                 </div>
@@ -100,7 +97,7 @@
                                     class="block font-medium text-sm ">Diagnóstico</label>
                                 <input id="diagnostico"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                    name="diagnostico" value="{{ old('diagnostico') }}">
+                                    name="diagnostico" >
                             </div>
 
                              <!-- Campo de Solicitar Estudios -->
@@ -113,7 +110,7 @@
                                                 <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
                                             @endforeach
                                         </select>
-                                        <textarea id="indicaciones_estudios" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar">{{ old('indicaciones_estudios') }}</textarea>
+                                        <textarea id="indicaciones_estudios" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar">{{ $servicio->descripcion }}</textarea>
                                     </div>
                                 </div>
                                 <button type="button" id="add-estudio" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Estudio</button>
@@ -121,15 +118,12 @@
 
                             <!-- Receta -->
                             <div>
-                                <label for="receta"
-                                    class="block font-medium text-sm ">Receta</label>
+                                <label for="receta" class="block font-medium text-sm">Receta</label>
                                 <div id="medicamentos-container" class="flex flex-col gap-4">
                                     <div class="flex gap-4 medicamento">
                                         <div class="relative w-1/4">
                                             <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
-                                            <select id="medicacion"
-                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                                name="medicacion[]">
+                                            <select id="medicacion" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
                                                 @foreach($productos as $producto)
                                                     <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
                                                 @endforeach
@@ -137,33 +131,20 @@
                                         </div>
                                         <div class="relative w-1/4">
                                             <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="cantidad"
-                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                                name="cantidad[]" value="{{ old('cantidad') }}"
-                                                placeholder="Cantidad">
+                                            <input id="cantidad" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad">
                                         </div>
                                         <div class="relative w-1/4">
                                             <i class="fa fa-clock absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="frecuencia"
-                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                                name="frecuencia[]" value="{{ old('frecuencia') }}"
-                                                placeholder="Frecuencia">
+                                            <input id="frecuencia" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="frecuencia[]" placeholder="Frecuencia">
                                         </div>
                                         <div class="relative w-1/4">
                                             <i class="fa fa-hourglass-half absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="duracion"
-                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                                name="duracion[]" value="{{ old('duracion') }}"
-                                                placeholder="Duración">
+                                            <input id="duracion" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="duracion[]" placeholder="Duración">
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" id="add-medicamento"
-                                    class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar
-                                    Medicamento</button>
-                                <textarea id="notas_receta"
-                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                    name="notas_receta" placeholder="Agregar notas...">{{ old('notas_receta') }}</textarea>
+                                <button type="button" id="add-medicamento" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Medicamento</button>
+                                <textarea id="notas_receta" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="notas_receta" placeholder="Agregar notas...">{{ old('notas_receta') }}</textarea>
                             </div>
 
                             <div class="flex justify-end mt-4">
@@ -185,31 +166,29 @@
             <div class="flex gap-4 medicamento">
                 <div class="relative w-1/4">
                     <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
-                    <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                           name="medicacion[]">
-                        @foreach($productos as $productoo)
+                    <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
+                        @foreach($productos as $producto)
                             <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="relative w-1/4">
                     <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                           name="cantidad[]" placeholder="Cantidad">
+                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad">
                 </div>
                 <div class="relative w-1/4">
                     <i class="fa fa-clock absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                           name="frecuencia[]" placeholder="Frecuencia">
+                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="frecuencia[]" placeholder="Frecuencia">
                 </div>
                 <div class="relative w-1/4">
                     <i class="fa fa-hourglass-half absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                           name="duracion[]" placeholder="Duración">
+                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="duracion[]" placeholder="Duración">
                 </div>
+                <button type="button" class="remove-medicamento px-2 py-1 bg-red-600 text-white rounded-md">Eliminar</button>
             </div>
         `;
             container.insertAdjacentHTML('beforeend', medicamentoHTML);
+            addRemoveFunctionality();
         });
 
         document.getElementById('add-estudio').addEventListener('click', function() {
@@ -221,11 +200,30 @@
                         <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
                     @endforeach
                 </select>
-                <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar">{{ old('indicaciones_estudios') }}</textarea>
+                <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
+                <button type="button" class="remove-estudio px-2 py-1 bg-red-600 text-white rounded-md">Eliminar</button>
             </div>
         `;
             container.insertAdjacentHTML('beforeend', estudioHTML);
+            addRemoveFunctionality();
         });
+
+        function addRemoveFunctionality() {
+            document.querySelectorAll('.remove-medicamento').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+            });
+
+            document.querySelectorAll('.remove-estudio').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+            });
+        }
+
+        // Add initial remove functionality
+        addRemoveFunctionality();
     </script>
 </body>
 
