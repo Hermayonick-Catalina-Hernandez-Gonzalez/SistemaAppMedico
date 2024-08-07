@@ -29,9 +29,11 @@
                             <!-- Nombre del paciente -->
                             <div class="relative">
                                 <label for="paciente" class="block font-medium text-sm">Nombre del paciente</label>
-                                <input id="paciente"
-                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
-                                    name="paciente">
+                                <select id="paciente" name="paciente" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                                    @foreach ($pacientes as $paciente)
+                                        <option value="{{ $paciente->id }}">{{ $paciente->nombre }} {{ $paciente->apellido}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <!-- Motivo de la consulta -->
                             <div>
@@ -55,33 +57,33 @@
                                         <i class="fa fa-user absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="edad"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="edad" placeholder="Edad">
+                                            name="edad" placeholder="Edad" maxlength="3">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-ruler-vertical absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="talla"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="talla"  placeholder="Talla (m)">
+                                            name="talla"  placeholder="Talla (cm)" maxlength="3">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-thermometer-half absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="temperatura"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
                                             name="temperatura" 
-                                            placeholder="Temperatura (°C)">
+                                            placeholder="Temperatura (°C)" maxlength="2">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-weight absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="peso"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="peso"  placeholder="Peso (kg)">
+                                            name="peso"  placeholder="Peso (kg)" maxlength="3">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-heartbeat absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="frecuencia_cardiaca"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
                                             name="frecuencia_cardiaca" 
-                                            placeholder="Frecuencia (bpm)">
+                                            placeholder="Frecuencia (bpm)" maxlength="6">
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +156,7 @@
                                 <select id="enfermero_select" name="enfermero_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" style="display: none;">
                                     <option value="">Seleccione un enfermero</option>
                                     @foreach ($enfermeros as $enfermero)
-                                        <option value="{{ $enfermero->id }}">{{ $enfermero->nombre }}</option>
+                                        <option value="{{ $enfermero->id }}">{{ $enfermero->nombre }} {{ $enfermero->apellido}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -254,6 +256,27 @@
                 enfermeroSelect.style.display = 'none';
             }
         });
+
+        // Formato para la frecuencia cardiaca
+        document.getElementById('frecuencia_cardiaca').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Eliminar cualquier carácter que no sea número
+            if (value.length > 3) {
+                e.target.value = value.slice(0, 3) + '/' + value.slice(3, 5);
+            } else {
+                e.target.value = value;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const numericFields = ['edad', 'talla', 'temperatura', 'peso'];
+
+        numericFields.forEach(function(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.addEventListener('input', function(event) {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        });
+    });
     </script>
 </body>
 
