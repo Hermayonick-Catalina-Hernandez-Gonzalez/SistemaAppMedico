@@ -50,10 +50,11 @@
                         <x-nav-link href="/registro-pacientes" :active="request()->routeIs('medico.registro-pacientes')" class="text-black">
                             {{ __('Registro Pacientes') }}
                         </x-nav-link>
-
+                        
                         <x-nav-link href="/crear-cita" :active="request()->routeIs('medico.crear-cita')" class="text-black">
                             {{ __('Crear Cita') }}
                         </x-nav-link>
+                        
                     @endif
 
                     <!-- secretario links -->
@@ -70,7 +71,7 @@
                             {{ __('Pagos De Consultas') }}
                         </x-nav-link>
                         
-                        <x-nav-link  href="{{ route('secretario.registro-productos') }}" :active="request()->routeIs('secretario.pagos')" class="text-black">
+                        <x-nav-link  href="{{ route('secretario.registro-productos') }}" :active="request()->routeIs('secretario.registro-productos')" class="text-black">
                             {{ __('Registrar Productos') }}
                         </x-nav-link>
 
