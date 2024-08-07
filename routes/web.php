@@ -22,6 +22,7 @@ use App\Http\Controllers\RegistroProductoADMINController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroProductoSECRETARIOController;
 
+
 // Ruta principal para iniciar sesión
 Route::get('/', function () {
     return view('welcome');
@@ -90,7 +91,14 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function () {
     Route::get('/admin/registro-enfermeros', [RegistroEnfermeroController::class, 'index'])->name('admin.registro-enfermeros'); //* Vista para registrar enfermeros
     Route::post('/admin/registro-enfermeros', [RegistroEnfermeroController::class, 'registro_enfermeros'])->name('admin.registro-enfermeros.store'); //* POST a registrar enfermeros a BD
 
-    //Productos
+    /**
+     * Rutas para modificar la información de los productos
+     *
+     */
+    Route::get('/admin/registro-productos/{productos}/edit', [RegistroProductoADMINController::class, 'edit'])->name('registro-productos.edit'); //* Vista para editar pacientes
+    Route::patch('/admin/registro-productos/{productos}', [RegistroProductoADMINController::class, 'update'])->name('registro-productos.update'); //* PATCH a actualizar pacientes
+    Route::delete('/admin/registro-productos/{productos}', [RegistroProductoADMINController::class, 'destroy'])->name('registro-productos.destroy'); //* DELETE a eliminar pacientes
+
     Route::get('/admin/registro-productos', [RegistroProductoADMINController::class, 'index'])->name('admin.registro-productos');
     Route::post('/admin/registro-productos', [RegistroProductoADMINController::class, 'store'])->name('admin.registro-productos.store');
 });

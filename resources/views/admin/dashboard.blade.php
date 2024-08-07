@@ -207,10 +207,11 @@
                                         <td class="py-3 px-6 text-left">{{ $servicio->precio }}</td>
                                         <td class="py-3 px-6 text-left">{{ $servicio->medico->nombre }}</td>
                                         <td class="py-3 px-6 text-left">
-                                        <div class="flex space-x-2">
+                                            <div class="flex space-x-2">
                                                 <a href="{{ route('registro-servicios.edit', $servicio->id) }}"
-                                                class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">{{ __('Modificar')}}</a>
-                                                <form action="{{ route('registro-servicios.destroy', $servicio->id) }}"
+                                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">{{ __('Modificar') }}</a>
+                                                <form
+                                                    action="{{ route('registro-servicios.destroy', $servicio->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('¿Está seguro de que desea eliminar este servicio?');">
                                                     @csrf
@@ -232,12 +233,11 @@
                     </div>
                 </div>
 
-                <!-- Contenido de la tabla de Productos -->
                 <div class="mt-6 bg-gray-200 p-6 rounded-lg shadow">
                     <h3 class="text-lg font-semibold text-gray-900">Lista de Productos</h3>
-                     <!-- Buscador -->
-                     <div class="flex justify-between items-center mb-4">
-                        <input type="text" id="productos_search" placeholder="Buscar por nombre de servicio.."
+                    <!-- Buscador -->
+                    <div class="flex justify-between items-center mb-4">
+                        <input type="text" id="productos_search" placeholder="Buscar por nombre de producto..."
                             class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
                     <!-- Tabla -->
@@ -247,8 +247,9 @@
                                 <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Nombre</th>
                                     <th class="py-3 px-6 text-left">Cantidad</th>
-                                    <th class="py-3 px-6 text-left">Fecha Vecimiento</th>
+                                    <th class="py-3 px-6 text-left">Fecha Vencimiento</th>
                                     <th class="py-3 px-6 text-left">Precio</th>
+                                    <th class="py-3 px-6 text-left">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm">
@@ -258,6 +259,24 @@
                                         <td class="py-3 px-6 text-left">{{ $producto->cantidad }}</td>
                                         <td class="py-3 px-6 text-left">{{ $producto->fecha_vencimiento }}</td>
                                         <td class="py-3 px-6 text-left">{{ $producto->precio }}</td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="flex space-x-2">
+                                                <a href="{{ route('registro-productos.edit', $producto->id) }}"
+                                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                    {{ __('Modificar') }}
+                                                </a>
+                                                <form action="{{ route('registro-productos.destroy', $producto->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('¿Está seguro de que desea eliminar este producto?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                        {{ __('Eliminar') }}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -267,8 +286,6 @@
 
                     </div>
                 </div>
-
-            </div>
         </div>
     </x-app-layout>
 </body>

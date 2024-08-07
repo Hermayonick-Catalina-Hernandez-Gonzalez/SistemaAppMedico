@@ -25,4 +25,29 @@ class RegistroProductoADMINController extends Controller
 
         return redirect()->back()->with('success', 'Producto registrado correctamente.');
     }
+    public function edit($id)
+    {
+        $producto = Producto::findOrFail($id);
+        return view('admin.productos.edit', compact('producto'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $producto = Producto::findOrFail($id);
+        $producto->nombre = $request->input('nombre');
+        $producto->cantidad = $request->input('cantidad');
+        $producto->fecha_vencimiento = $request->input('fecha_vencimiento');
+        $producto->precio = $request->input('precio');
+        $producto->save();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Producto actualizado con éxito.');
+    }
+
+    public function destroy($id)
+    {
+        $servicio = Producto::findOrFail($id);
+        $servicio->delete();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Producto eliminado con éxito.');
+    }
 }
