@@ -38,7 +38,7 @@ class RegistroSecretarioADMINController extends Controller
                 'role' => $request->role,
                 'profesion' => $request->profesion,
             ]);
-    
+
             if ($request->role === 'Médico') {
                 $user->medico()->create([
                     'profesion' => $request->profesion,

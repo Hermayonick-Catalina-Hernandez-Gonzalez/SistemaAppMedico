@@ -23,10 +23,9 @@
                     </div>
                     <!-- Tabla -->
                     <div class="overflow-x-auto flex justify-center">
-                        <table class="min-w-full bg-white  rounded-lg shadow-md">
+                        <table class="min-w-full bg-white rounded-lg shadow-md">
                             <thead>
-                                <tr
-                                    class="bg-gray-200  text-gray-600  uppercase text-sm leading-normal">
+                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Paciente</th>
                                     <th class="py-3 px-6 text-left">Fecha</th>
                                     <th class="py-3 px-6 text-left">Hora</th>
@@ -35,27 +34,32 @@
                                     <th class="py-3 px-6 text-left">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-gray-600  text-sm">
-                                <tr class="border-b border-gray-200 ">
-                                    <td class="py-3 px-6 text-left">Diego Ortiz</td>
-                                    <td class="py-3 px-6 text-left">05/06/2021</td>
-                                    <td class="py-3 px-6 text-left">13:00</td>
-                                    <td class="py-3 px-6 text-left">Finalizada</td>
-                                    <td class="py-3 px-6 text-left">Consulta General</td>
+                            <tbody class="text-gray-600 text-sm">
+                                @foreach($citas as $cita)
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-6 text-left">{{ $cita->pacientes }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $cita->fecha }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $cita->hora }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $cita->servicio }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $cita->estado_cita }}</td>
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex space-x-2">
-                                            <a href="#"
+                                            <a href="{{ route('consultas.edit', $cita->id) }}"
                                                 class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                Ver cita
-                                            </a>
-                                            <a href="#"
-                                                class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                Eliminar Cita
-                                            </a>
-
+                                                Modificar Cita
+                                             </a>
+                                            <form action="{{ route('consultas.destroy', $cita->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta cita?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                    Eliminar Cita
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
