@@ -22,7 +22,7 @@
             </h2>
         </x-slot>
 
-        @include('fullcalendar.master')
+        @include('fullcalendar.medico')
     </x-app-layout>
 </body>
 
