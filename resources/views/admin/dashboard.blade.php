@@ -181,6 +181,59 @@
                     </div>
                 </div>
 
+                <!-- Contenido de la tabla de Enfermeros -->
+                <div class="mt-6 bg-gray-200 p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-900">Lista de usuarios Enfermeros</h3>
+                    <!-- Buscador -->
+                    <div class="flex justify-between items-center mb-4">
+                        <input type="text" id="enfermeros_search" placeholder="Buscar por nombre de enfermero..."
+                            class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+                    <!-- Tabla -->
+                    <div class="overflow-x-auto flex justify-center">
+                        <table id="enfermeros_table" class="min-w-full bg-white rounded-lg shadow-md">
+                            <thead>
+                                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Nombre</th>
+                                    <th class="py-3 px-6 text-left">Apellido</th>
+                                    <th class="py-3 px-6 text-left">Teléfono</th>
+                                    <th class="py-3 px-6 text-left">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm">
+                                @foreach ($enfermeros as $enfermero)
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-6 text-left">{{ $enfermero->nombre }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $enfermero->apellido }}</td>
+                                        <td class="py-3 px-6 text-left">{{ $enfermero->telefono }}</td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="flex space-x-2">
+                                                <a href="{{ route('enfermeros.edit', $enfermero->id) }}"
+                                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                    {{ __('Modificar') }}
+                                                </a>
+                                                <form action="{{ route('enfermeros.destroy', $enfermero->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('¿Está seguro de que desea eliminar este enfermero?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="ms-4 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                        {{ __('Eliminar') }}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        {{ $enfermeros->links() }}
+                    </div>
+                </div>
+
                 <!-- Contenido de la tabla de Servicios -->
                 <div class="mt-6 bg-gray-200 p-6 rounded-lg shadow">
                     <!-- Buscador -->
@@ -209,9 +262,8 @@
                                         <td class="py-3 px-6 text-left">
                                             <div class="flex space-x-2">
                                                 <a href="{{ route('registro-servicios.edit', $servicio->id) }}"
-                                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">{{ __('Modificar') }}</a>
-                                                <form
-                                                    action="{{ route('registro-servicios.destroy', $servicio->id) }}"
+                                                class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">{{ __('Modificar')}}</a>
+                                                <form action="{{ route('registro-servicios.destroy', $servicio->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('¿Está seguro de que desea eliminar este servicio?');">
                                                     @csrf
@@ -233,11 +285,12 @@
                     </div>
                 </div>
 
+                <!-- Contenido de la tabla de Productos -->
                 <div class="mt-6 bg-gray-200 p-6 rounded-lg shadow">
                     <h3 class="text-lg font-semibold text-gray-900">Lista de Productos</h3>
-                    <!-- Buscador -->
-                    <div class="flex justify-between items-center mb-4">
-                        <input type="text" id="productos_search" placeholder="Buscar por nombre de producto..."
+                     <!-- Buscador -->
+                     <div class="flex justify-between items-center mb-4">
+                        <input type="text" id="productos_search" placeholder="Buscar por nombre de servicio.."
                             class="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     </div>
                     <!-- Tabla -->
@@ -247,7 +300,7 @@
                                 <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Nombre</th>
                                     <th class="py-3 px-6 text-left">Cantidad</th>
-                                    <th class="py-3 px-6 text-left">Fecha Vencimiento</th>
+                                    <th class="py-3 px-6 text-left">Fecha Vecimiento</th>
                                     <th class="py-3 px-6 text-left">Precio</th>
                                     <th class="py-3 px-6 text-left">Acciones</th>
                                 </tr>
@@ -262,8 +315,8 @@
                                         <td class="py-3 px-6 text-left">
                                             <div class="flex space-x-2">
                                                 <a href="{{ route('registro-productos.edit', $producto->id) }}"
-                                                    class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                    {{ __('Modificar') }}
+                                                class="ms-4 inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                {{ __('Modificar')}}
                                                 </a>
                                                 <form action="{{ route('registro-productos.destroy', $producto->id) }}"
                                                     method="POST"
@@ -286,6 +339,8 @@
 
                     </div>
                 </div>
+
+            </div>
         </div>
     </x-app-layout>
 </body>
