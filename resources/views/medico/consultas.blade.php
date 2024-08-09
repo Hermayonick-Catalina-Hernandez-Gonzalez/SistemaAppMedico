@@ -29,22 +29,26 @@
                             <!-- Nombre del paciente -->
                             <div class="relative">
                                 <label for="paciente" class="block font-medium text-sm">Nombre del paciente</label>
-                                <select id="paciente" name="paciente" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                                <select id="paciente" name="paciente"
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
                                     @foreach ($pacientes as $paciente)
-                                        <option value="{{ $paciente->id }}">{{ $paciente->nombre }} {{ $paciente->apellido}}</option>
+                                        <option value="{{ $paciente->id }}">{{ $paciente->nombre }}
+                                            {{ $paciente->apellido }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <!-- Motivo de la consulta -->
                             <div>
-                                <label for="motivo_consulta" class="block font-medium text-sm">Motivo de la consulta</label>
+                                <label for="motivo_consulta" class="block font-medium text-sm">Motivo de la
+                                    consulta</label>
                                 <textarea id="motivo_consulta"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
                                     name="motivo_consulta"></textarea>
                             </div>
                             <!-- Notas de padecimiento -->
                             <div>
-                                <label for="notas_padecimiento" class="block font-medium text-sm">Notas de padecimiento</label>
+                                <label for="notas_padecimiento" class="block font-medium text-sm">Notas de
+                                    padecimiento</label>
                                 <textarea id="notas_padecimiento"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
                                     name="notas_padecimiento"></textarea>
@@ -63,61 +67,66 @@
                                         <i class="fa fa-ruler-vertical absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="talla"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="talla"  placeholder="Talla (cm)" maxlength="3">
+                                            name="talla" placeholder="Talla (cm)" maxlength="3">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-thermometer-half absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="temperatura"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="temperatura" 
-                                            placeholder="Temperatura (°C)" maxlength="2">
+                                            name="temperatura" placeholder="Temperatura (°C)" maxlength="2">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-weight absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="peso"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="peso"  placeholder="Peso (kg)" maxlength="3">
+                                            name="peso" placeholder="Peso (kg)" maxlength="3">
                                     </div>
                                     <div class="relative">
                                         <i class="fa fa-heartbeat absolute left-2 top-2.5 text-gray-400"></i>
                                         <input id="frecuencia_cardiaca"
                                             class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
-                                            name="frecuencia_cardiaca" 
-                                            placeholder="Frecuencia (bpm)" maxlength="6">
+                                            name="frecuencia_cardiaca" placeholder="Frecuencia (bpm)" maxlength="6">
                                     </div>
                                 </div>
                             </div>
                             <!-- Campo de alergias -->
                             <div>
-                                <label for="alergias"
-                                    class="block font-medium text-sm">Alergias</label>
+                                <label for="alergias" class="block font-medium text-sm">Alergias</label>
                                 <textarea id="alergias"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
                                     name="alergias" placeholder="Escribe las alergias del paciente...">{{ old('alergias') }}</textarea>
                             </div>
                             <!-- Diagnóstico -->
                             <div>
-                                <label for="diagnostico"
-                                    class="block font-medium text-sm">Diagnóstico</label>
+                                <label for="diagnostico" class="block font-medium text-sm">Diagnóstico</label>
                                 <input id="diagnostico"
                                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
                                     name="diagnostico">
                             </div>
                             <!-- Solicitar Estudios -->
                             <div>
-                                <label for="solicitar_estudios" class="block font-medium text-sm">Solicitar estudios</label>
+                                <label for="solicitar_estudios" class="block font-medium text-sm">Solicitar
+                                    estudios</label>
                                 <div id="estudios-container" class="flex flex-col gap-4">
                                     <div class="flex gap-4 estudio">
-                                        <select id="solicitar_estudios" name="solicitar_estudios[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                                        <select name="solicitar_estudios[]"
+                                            class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                                            <option value="">Seleccionar estudio</option>
                                             @foreach ($servicios as $servicio)
-                                                <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                                                <option value="{{ $servicio->id }}"
+                                                    data-price="{{ $servicio->precio }}">{{ $servicio->nombre }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        <textarea id="indicaciones_estudios" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
+                                        <textarea
+                                            class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
+                                            name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
                                     </div>
                                 </div>
-                                <button type="button" id="add-estudio" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Estudio</button>
+                                <button type="button" id="add-estudio"
+                                    class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Estudio</button>
                             </div>
+
                             <!-- Receta -->
                             <div>
                                 <label for="receta" class="block font-medium text-sm">Receta</label>
@@ -125,40 +134,67 @@
                                     <div class="flex gap-4 medicamento">
                                         <div class="relative w-1/4">
                                             <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
-                                            <select id="medicacion" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
-                                                @foreach($productos as $producto)
-                                                    <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                                            <select
+                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
+                                                name="medicacion[]">
+                                                <option value="">Seleccionar medicamento</option>
+                                                @foreach ($productos as $producto)
+                                                    <option value="{{ $producto->id }}"
+                                                        data-price="{{ $producto->precio }}">{{ $producto->nombre }}
+                                                    </option>
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="relative w-1/4">
-                                            <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="cantidad" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad">
+                                            <i
+                                                class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
+                                            <input
+                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
+                                                name="cantidad[]" placeholder="Cantidad">
                                         </div>
                                         <div class="relative w-1/4">
                                             <i class="fa fa-clock absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="frecuencia" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="frecuencia[]" placeholder="Frecuencia">
+                                            <input
+                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
+                                                name="frecuencia[]" placeholder="Frecuencia">
                                         </div>
                                         <div class="relative w-1/4">
                                             <i class="fa fa-hourglass-half absolute left-2 top-2.5 text-gray-400"></i>
-                                            <input id="duracion" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="duracion[]" placeholder="Duración">
+                                            <input
+                                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10"
+                                                name="duracion[]" placeholder="Duración">
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" id="add-medicamento" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Medicamento</button>
-                                <textarea id="notas_receta" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="notas_receta" placeholder="Agregar notas...">{{ old('notas_receta') }}</textarea>
+                                <button type="button" id="add-medicamento"
+                                    class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Agregar
+                                    Medicamento</button>
+                                <textarea
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
+                                    name="notas_receta" placeholder="Agregar notas...">{{ old('notas_receta') }}</textarea>
                             </div>
-
                             <!-- Ha participado un enfermero en la consulta -->
                             <div>
-                                <label for="enfermero_participacion" class="block font-medium text-sm">¿Ha participado un enfermero en la consulta?</label>
-                                <input type="checkbox" id="enfermero_participacion" name="enfermero_participacion" class="mr-2">
-                                <select id="enfermero_select" name="enfermero_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" style="display: none;">
+                                <label for="enfermero_participacion" class="block font-medium text-sm">¿Ha participado
+                                    un enfermero en la consulta?</label>
+                                <input type="checkbox" id="enfermero_participacion" name="enfermero_participacion"
+                                    class="mr-2">
+                                <select id="enfermero_select" name="enfermero_id"
+                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
+                                    style="display: none;">
                                     <option value="">Seleccione un enfermero</option>
                                     @foreach ($enfermeros as $enfermero)
-                                        <option value="{{ $enfermero->id }}">{{ $enfermero->nombre }} {{ $enfermero->apellido}}</option>
+                                        <option value="{{ $enfermero->id }}">{{ $enfermero->nombre }}
+                                            {{ $enfermero->apellido }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div id="total-container"
+                                class="fixed right-0 top-22 p-4 bg-gray-100 border-l border-gray-300">
+                                <h2 class="text-lg font-semibold">Total</h2>
+                                <p id="total-price" class="text-xl font-bold">$0.00</p>
                             </div>
 
                             <div class="flex justify-end mt-4">
@@ -181,8 +217,8 @@
                 <div class="relative w-1/4">
                     <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
                     <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
-                        @foreach($productos as $producto)
-                            <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                        @foreach ($productos as $producto)
+                              <option value="{{ $producto->id }}" data-price="{{ $producto->precio }}">{{ $producto->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -211,7 +247,7 @@
             <div class="flex gap-4 estudio">
                 <select name="solicitar_estudios[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
                     @foreach ($servicios as $servicio)
-                        <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                       <option value="{{ $servicio->id }}" data-price="{{ $servicio->precio }}">{{ $servicio->nombre }}</option>
                     @endforeach
                 </select>
                 <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
@@ -268,16 +304,77 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-        const numericFields = ['edad', 'talla', 'temperatura', 'peso'];
+            const numericFields = ['edad', 'talla', 'temperatura', 'peso'];
 
-        numericFields.forEach(function(fieldId) {
-            const field = document.getElementById(fieldId);
-            field.addEventListener('input', function(event) {
-                this.value = this.value.replace(/[^0-9]/g, '');
+            numericFields.forEach(function(fieldId) {
+                const field = document.getElementById(fieldId);
+                field.addEventListener('input', function(event) {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
             });
         });
-    });
     </script>
+    <script>
+        function updateTotal() {
+            let total = 0;
+
+            // Sumar precios de medicamentos
+            document.querySelectorAll('.medicamento').forEach(function(medicamento) {
+                const select = medicamento.querySelector('select[name="medicacion[]"]');
+                const quantityInput = medicamento.querySelector('input[name="cantidad[]"]');
+
+                if (select && quantityInput) {
+                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
+                    const quantity = parseInt(quantityInput.value || 0);
+
+                    total += price * quantity;
+                }
+            });
+
+            // Sumar precios de estudios
+            document.querySelectorAll('.estudio').forEach(function(estudio) {
+                const select = estudio.querySelector('select[name="solicitar_estudios[]"]');
+
+                if (select) {
+                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
+                    total += price;
+                }
+            });
+
+            document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Actualizar el total al cargar la página
+        updateTotal();
+
+        // Actualizar el total cuando se cambian los valores de medicamentos
+        document.getElementById('medicamentos-container').addEventListener('change', function() {
+            updateTotal();
+        });
+
+        // Actualizar el total cuando se cambian los valores de estudios
+        document.getElementById('estudios-container').addEventListener('change', function() {
+            updateTotal();
+        });
+
+        // Actualizar el total cuando se agrega o elimina un medicamento o estudio
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-medicamento') || event.target.classList.contains(
+                    'remove-estudio')) {
+                updateTotal();
+            }
+        });
+
+        // Actualizar el total cuando se agrega un nuevo medicamento o estudio
+        document.getElementById('add-medicamento').addEventListener('click', function() {
+            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo medicamento
+        });
+
+        document.getElementById('add-estudio').addEventListener('click', function() {
+            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo estudio
+        });
+    </script>
+
 </body>
 
 </html>

@@ -5,9 +5,9 @@ use App\Http\Controllers\ConsultasMEDICOController;
 use App\Http\Controllers\ConsultasSECRETARIOController;
 use App\Http\Controllers\CrearCitasMEDICOController;
 use App\Http\Controllers\CrearCitasSecretarioController;
-use App\Http\Controllers\Enfermero\EnfermeroController;
 use App\Http\Controllers\Medico\MedicoController;
 use App\Http\Controllers\Paciente\PacienteController;
+use App\Http\Controllers\Enfermero\EnfermeroController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistroMedicosADMINController;
 use App\Http\Controllers\RegistroPacientesADMINController;
@@ -47,7 +47,7 @@ Route::middleware(['auth', 'MedicoMiddleware'])->group(function () {
     Route::post('registro-pacientes', [RegistroPacientesMEDICOController::class, 'registro_paciente'])->name('registro-pacientes.store'); //* POST a registrar pacientes a BD
     Route::get('consultas', [ConsultasMEDICOController::class, 'index'])->name('consultas');
     Route::get('crear-cita', [CrearCitasMEDICOController::class, 'index'])->name('crear-cita');
-    Route::post('crear-cita', [CrearCitasMEDICOController::class, 'store'])->name('crear-cita.store');
+    Route::post('/medico/crear-cita', [CrearCitasMEDICOController::class, 'store'])->name('medico.crear-cita');
 });
 
 //* Rutas para el administrador
@@ -112,7 +112,6 @@ Route::middleware(['auth', 'AdministradorMiddleware'])->group(function () {
     Route::post('/admin/registro-productos', [RegistroProductoADMINController::class, 'store'])->name('admin.registro-productos.store');
 });
 
-
 //* Rutas para el secretario
 Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
     Route::get('/secretario/dashboard', [SecretarioController::class, 'index'])->name('secretario.dashboard'); //* Vista principal del secretario
@@ -120,7 +119,7 @@ Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
     Route::post('secretario/registro-pacientes', [RegistroPacientesSECRETARIOController::class, 'registro_paciente'])->name('secretario.registro-pacientes.store'); //* POST a registrar pacientes a BD
     Route::get('/secretario/consultas', [ConsultasSecretarioController::class, 'index'])->name('secretario.consultas'); //* Vista para consultar pacientes
     Route::get('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'index'])->name('secretario.crear-cita'); //* Vista para crear citas
-    Route::post('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'store'])->name('secretario.crear-cita.store'); //* POST a crear citas
+    Route::post('/secretario/crear-cita', [CrearCitasSecretarioController::class, 'store'])->name('secretario.crear-cita.blade'); //* POST a crear citas
     Route::get('/secretario/citas', [CrearCitasSecretarioController::class, 'getCitas'])->name('secretario.citas');
     Route::get('/secretario/pagos', [PagosController::class, 'index'])->name('secretario.pagos'); //* Vista para pagos
     Route::get('/secretario/producto', [ProductosController::class, 'index'])->name('secretario.medicamentos'); //* Vista para productos

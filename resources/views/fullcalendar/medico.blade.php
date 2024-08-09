@@ -44,7 +44,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('crear-cita.store') }}">
+            <form method="POST" action="{{ route('medico.crear-cita') }}">
                 @csrf
                 <!-- Nombre del paciente -->
                 <div class="mb-4">

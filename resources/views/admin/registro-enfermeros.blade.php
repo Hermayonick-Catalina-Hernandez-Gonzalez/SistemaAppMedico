@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800  leading-tight">
             {{ __('Registro de usuarios Enfermeros')}}
         </h2>
     </x-slot>
@@ -8,7 +8,7 @@
     <!-- TODO -->
     <div class="py-12 flex justify-center">
         <div class="max-w-lg w-full sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <form method="post" action="{{ route('admin.registro-enfermeros.store') }}">
                     @csrf
                     <!-- Nombre -->

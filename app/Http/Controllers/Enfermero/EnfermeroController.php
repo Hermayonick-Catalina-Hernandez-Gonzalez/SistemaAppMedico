@@ -15,7 +15,7 @@ class EnfermeroController extends Controller
 
         //* Retorna la vista con los enfermeros
         return view('admin.dashboard', compact('enfermeros'));
-        
+
     }
 
     public function edit($id)

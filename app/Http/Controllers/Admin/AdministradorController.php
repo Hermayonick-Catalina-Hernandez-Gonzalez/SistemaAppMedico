@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Enfermero;
 use App\Models\Paciente;
-use App\Models\Producto;
-use App\Models\Servicios;
 use App\Models\User;
+use App\Models\Enfermero;
+use App\Models\Servicios;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class AdministradorController extends Controller
