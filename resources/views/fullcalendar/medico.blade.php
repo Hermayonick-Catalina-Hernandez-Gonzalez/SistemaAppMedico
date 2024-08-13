@@ -15,7 +15,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 100%
+    max-width: 100%;
   }
   .fc-daygrid-event {
     display: block;
@@ -44,7 +44,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('medico.crear-cita') }}">
+            <form method="POST" action="{{ route('crear-cita') }}">
                 @csrf
                 <!-- Nombre del paciente -->
                 <div class="mb-4">
@@ -108,71 +108,79 @@
 
     var events = citas.map(function(cita) {
         return {
-          title: cita.pacientes + ' - ' + cita.servicio + ' - Dr. ' + (cita.medico ? cita.medico.nombre + ' ' + cita.medico.apellido : 'Sin asignar'),
+            title: cita.pacientes + ' - ' + cita.servicio + ' - Dr. ' + (cita.medico ? cita.medico.nombre + ' ' + cita.medico.apellido : 'Sin asignar'),
             start: cita.fecha + 'T' + cita.hora,
             description: 'Descripción:' + cita.Descripcion, // Descripción adicional para el evento
         };
     });
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
-      locale: 'es',
-      selectable: true,
-      select: function(info) {
-        var now = new Date();
-        var selectedDate = new Date(info.startStr);
-        if (selectedDate.setHours(0,0,0,0) >= now.setHours(0,0,0,0)) {
-          $('#date').val(info.startStr);
-          $('#eventModal').modal('show');
-          updateAvailableTimes(info.startStr);
-        } else {
-          alert('No puedes seleccionar una fecha pasada.');
-        }
-      },
-      editable: true,
-      droppable: true,
-      events: events,
-      eventContent: function(arg) {
-        let italicEl = document.createElement('div')
-        let description = document.createElement('div')
-        italicEl.innerHTML = '<b>' + arg.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + '</b> ' + arg.event.title;
-        description.innerHTML = '<span>' + arg.event.extendedProps.description + '</span>'
-        let arrayOfDomNodes = [ italicEl, description ]
-        return { domNodes: arrayOfDomNodes }
-      },
-      height: 'auto',
-      dayMaxEventRows: true,
-      moreLinkClick: 'popover'
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        locale: 'es',
+        selectable: true,
+        select: function(info) {
+            var now = new Date();
+            var selectedDate = new Date(info.startStr);
+
+            // Convertir ambas fechas a formato 'YYYY-MM-DD'
+            var nowFormatted = now.toISOString().split('T')[0];
+            var selectedDateFormatted = selectedDate.toISOString().split('T')[0];
+
+            console.log("Fecha actual (formateada):", nowFormatted);
+            console.log("Fecha seleccionada (formateada):", selectedDateFormatted);
+
+            if (selectedDateFormatted >= nowFormatted) {
+                $('#date').val(selectedDateFormatted); // Asegura que solo se usa la parte de la fecha
+                $('#eventModal').modal('show');
+                updateAvailableTimes(selectedDateFormatted);
+            } else {
+                alert('No puedes seleccionar una fecha pasada.');
+            }
+        },
+        editable: true,
+        droppable: true,
+        events: events,
+        eventContent: function(arg) {
+            let italicEl = document.createElement('div');
+            let description = document.createElement('div');
+            italicEl.innerHTML = '<b>' + arg.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + '</b> ' + arg.event.title;
+            description.innerHTML = '<span>' + arg.event.extendedProps.description + '</span>';
+            let arrayOfDomNodes = [ italicEl, description ];
+            return { domNodes: arrayOfDomNodes };
+        },
+        height: 'auto',
+        dayMaxEventRows: true,
+        moreLinkClick: 'popover'
     });
     calendar.render();
 
-    // Actualiza las opciones de hora disponibles según las citas ya reservadas
     function updateAvailableTimes(selectedDate) {
-      var takenTimes = citas.filter(function(cita) {
-        return cita.fecha === selectedDate.split("T")[0];
-      }).map(function(cita) {
-        return cita.hora;
-      });
+        var takenTimes = citas.filter(function(cita) {
+            return cita.fecha === selectedDate;
+        }).map(function(cita) {
+            return cita.hora;
+        });
 
-      var timeSelect = $('#time');
-      var allTimes = [
-        '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
-        '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
-        '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
-      ];
+        var timeSelect = $('#time');
+        var allTimes = [
+            '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+            '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+            '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
+        ];
 
-      timeSelect.empty();
-      allTimes.forEach(function(time) {
-        if (!takenTimes.includes(time)) {
-          timeSelect.append(new Option(time, time));
-        }
-      });
+        timeSelect.empty();
+        allTimes.forEach(function(time) {
+            if (!takenTimes.includes(time)) {
+                timeSelect.append(new Option(time, time));
+            }
+        });
     }
-  });
+});
+
 </script>
 </body>
 </html>
