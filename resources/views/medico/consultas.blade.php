@@ -23,16 +23,16 @@
         <div class="py-12 flex justify-center">
             <div class="max-w-7xl w-full sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <form method="POST" action="{{ route('consultas') }}">
+                    <form method="post" action="{{ route('consultas.storeConsulta') }}">
                         @csrf
                         <div class="grid grid-cols-1 gap-6">
                             <!-- Nombre del paciente -->
                             <div class="relative">
                                 <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente</label>
-                                    <select id="paciente_id" name="paciente_id" required disabled>
+                                    <select id="paciente_id" name="paciente_id" required >
                                         @foreach($pacientes as $paciente)
                                             <option value="{{ $paciente->id }}" 
-                                                @if($paciente->nombre . ' ' . $paciente->apellido == $pacienteSeleccionado) 
+                                                @if(isset($pacienteSeleccionado) && $paciente->id == $pacienteSeleccionado->id) 
                                                     selected 
                                                 @endif>
                                                 {{ $paciente->nombre }} {{ $paciente->apellido }}

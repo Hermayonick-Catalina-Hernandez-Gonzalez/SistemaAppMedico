@@ -17,17 +17,18 @@ class ConsultasMEDICOController extends Controller
 {
     public function index(Request $request)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $servicios = Servicios::all();
             $productos = Producto::all();
             $pacientes = Paciente::all();
             $enfermeros = Enfermero::all();
-            $medicos = User::where('role', User::ROL_MEDICO)->get(); // Obtener todos los médicos)
-            $citas = Cita::with('paciente')->get();
-
-            $pacienteSeleccionado = $request->input('paciente');
-
-            return view('medico.consultas', compact('servicios', 'productos', 'pacientes', 'enfermeros', 'medicos', 'pacienteSeleccionado', 'citas'));
+            $medicoId = Auth::user()->id;
+            $medicos = User::where('role', User::ROL_MEDICO)->get(); // Obtener todos los médicos
+    
+            $pacienteIdSeleccionado = $request->input('paciente_id');
+            $pacienteSeleccionado = Paciente::find($pacienteIdSeleccionado);
+    
+            return view('medico.consultas', compact('servicios', 'productos', 'pacientes', 'enfermeros', 'pacienteSeleccionado', 'medicoId', 'medicos'));
         }
         
         return redirect()->route('login');
