@@ -47,7 +47,7 @@ Route::middleware(['auth', 'MedicoMiddleware'])->group(function () {
     Route::post('registro-pacientes', [RegistroPacientesMEDICOController::class, 'registro_paciente'])->name('registro-pacientes.store'); //* POST a registrar pacientes a BD
     Route::get('consultas', [ConsultasMEDICOController::class, 'index'])->name('consultas');
     Route::get('crear-cita', [CrearCitasMEDICOController::class, 'index'])->name('crear-cita');
-    Route::post('/medico/crear-cita', [CrearCitasMEDICOController::class, 'store'])->name('medico.crear-cita');
+    Route::post('crear-cita', [CrearCitasMEDICOController::class, 'store'])->name('crear-cita.store');
 });
 
 //* Rutas para el administrador
@@ -124,7 +124,7 @@ Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
     Route::get('/secretario/producto', [ProductosController::class, 'index'])->name('secretario.medicamentos'); //* Vista para productos
     //Productos
     Route::get('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'index'])->name('secretario.registro-productos');
-    Route::post('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'store'])->name('secretario.registro-productos');
+    Route::post('/secretario/registro-productos', [RegistroProductoSECRETARIOController::class, 'store'])->name('secretario.registro-productos.store');
 
     //rutas para las citas agendadas
     Route::get('/secretario/consultas', [ConsultasSecretarioController::class, 'index'])->name('secretario.consultas'); //* Vista para consultar pacientes
