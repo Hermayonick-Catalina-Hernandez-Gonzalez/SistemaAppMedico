@@ -2,88 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Enfermero;
-use App\Models\Servicios;
+use App\Models\Cita;
 use App\Models\Consulta;
-use App\Models\Producto;
+use App\Models\Enfermero;
+use App\Models\Medico;
 use App\Models\Paciente;
+use App\Models\Producto;
+use App\Models\Servicios;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConsultasMEDICOController extends Controller
 {
     public function index(Request $request)
     {
-        $servicios = Servicios::all(); // Obtener todos los servicios
-        $productos = Producto::all(); // Obtener todos los medicamentos
-        $enfermeros = Enfermero::all(); // Obtener todos los enfermeros
-        $pacientes = Paciente::all(); // Obtener todos los pacientes
-        $paciente = $request->input('paciente');
+        if(Auth::check()) {
+            $servicios = Servicios::all();
+            $productos = Producto::all();
+            $pacientes = Paciente::all();
+            $enfermeros = Enfermero::all();
+            $medicos = User::where('role', User::ROL_MEDICO)->get(); // Obtener todos los médicos)
 
-        return view('medico.consultas', compact('servicios', 'productos', 'enfermeros', 'pacientes', 'paciente'));
+            $pacienteSeleccionado = $request->input('paciente');
+
+            return view('medico.consultas', compact('servicios', 'productos', 'pacientes', 'enfermeros', 'medicos', 'pacienteSeleccionado'));
+        }
+        
+        return redirect()->route('login');
     }
 
-    public function store(Request $request)
+
+    public function storeConsulta(Request $request)
     {
-        // Validar la solicitud
-        $validatedData = $request->validate([
-            'paciente' => 'required|exists:pacientes,id',
+        $validateData = $request->validate([
+            'paciente_id' => 'required|exists:pacientes,id',
+            'medico_id' => 'required|exists:medicos,id',
             'motivo_consulta' => 'nullable|string',
             'notas_padecimiento' => 'nullable|string',
-            'edad' => 'nullable|numeric',
-            'talla' => 'nullable|numeric',
-            'temperatura' => 'nullable|numeric',
-            'peso' => 'nullable|numeric',
-            'frecuencia_cardiaca' => 'nullable|numeric',
-            'alergias' => 'nullable|string',
-            'diagnostico' => 'nullable|string',
-            'solicitar_estudios.*' => 'nullable|exists:servicios,id',
-            'indicaciones_estudios.*' => 'nullable|string',
-            'medicacion.*' => 'nullable|exists:productos,id',
-            'cantidad.*' => 'nullable|numeric',
-            'frecuencia.*' => 'nullable|string',
-            'duracion.*' => 'nullable|string',
-            'notas_receta' => 'nullable|string',
-            'enfermero_participacion' => 'nullable|boolean',
-            'enfermero_id' => 'nullable|exists:enfermeros,id',
-        ]);
-        // Crear la consulta
-        $consulta = Consulta::create([
-            'paciente_id' => $request->input('paciente'),
-            'motivo_consulta' => $request->input('motivo_consulta'),
-            'notas_padecimiento' => $request->input('notas_padecimiento'),
-            'edad' => $request->input('edad'),
-            'talla' => $request->input('talla'),
-            'temperatura' => $request->input('temperatura'),
-            'peso' => $request->input('peso'),
-            'frecuencia_cardiaca' => $request->input('frecuencia_cardiaca'),
-            'alergias' => $request->input('alergias'),
-            'diagnostico' => $request->input('diagnostico'),
-            'notas_receta' => $request->input('notas_receta'),
-            'enfermero_id' => $request->input('enfermero_id'),
+            'edad' => 'required|string|max:3',
+            'talla' => 'required|string|max:3',
+            'temperatura' => 'required|string|max:3',
+            'peso' => 'required|string|max:3',
+            'frecuencia_cardiaca' => 'required|string|max:7',
+            'alergias' => 'nullable|string|max:255',
+            'diagnostico' => 'nullable|string|max:255',
+            'solicitar_estudios' => 'nullable|string|max:255',
+            'indicaciones_estudios' => 'nullable|string|max:255',
+            'medicacion' => 'nullable|string|max:255',
+            'cantidad' => 'nullable|string|max:255',
+            'frecuencia' => 'nullable|string|max:255',
+            'duracion' => 'nullable|string|max:255',
+            'notas_receta' => 'nullable|string|max:255',
         ]);
 
-        // Asociar estudios
-        if ($request->has('solicitar_estudios')) {
-            foreach ($request->input('solicitar_estudios') as $index => $estudioId) {
-                $consulta->estudios()->create([
-                    'servicio_id' => $estudioId,
-                    'indicaciones' => $request->input('indicaciones_estudios')[$index] ?? '',
-                ]);
-            }
-        }
-
-        // Asociar medicamentos
-        if ($request->has('medicacion')) {
-            foreach ($request->input('medicacion') as $index => $medicamentoId) {
-                $consulta->medicamentos()->create([
-                    'producto_id' => $medicamentoId,
-                    'cantidad' => $request->input('cantidad')[$index] ?? 0,
-                    'frecuencia' => $request->input('frecuencia')[$index] ?? '',
-                    'duracion' => $request->input('duracion')[$index] ?? '',
-                ]);
-            }
-        }
-
-        return redirect()->back()->with('success', 'Consulta registrada exitosamente.');
+        Consulta::create($validateData);
+        return redirect()->route('consultas')->with('success', 'Consulta creada con éxito');
     }
 }

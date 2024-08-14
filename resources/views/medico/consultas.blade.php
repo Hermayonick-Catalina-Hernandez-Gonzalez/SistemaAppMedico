@@ -28,15 +28,27 @@
                         <div class="grid grid-cols-1 gap-6">
                             <!-- Nombre del paciente -->
                             <div class="relative">
-                                <label for="paciente" class="block font-medium text-sm">Nombre del paciente</label>
-                                <select id="paciente" name="paciente"
-                                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
-                                    @foreach ($pacientes as $paciente)
-                                        <option value="{{ $paciente->id }}">{{ $paciente->nombre }}
-                                            {{ $paciente->apellido }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente</label>
+                                    <select id="paciente_id" name="paciente_id" required disabled>
+                                        @foreach($pacientes as $paciente)
+                                            <option value="{{ $paciente->id }}" 
+                                                @if($paciente->nombre . ' ' . $paciente->apellido == $pacienteSeleccionado) 
+                                                    selected 
+                                                @endif>
+                                                {{ $paciente->nombre }} {{ $paciente->apellido }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                             </div>
+                            <!-- Medico que atendió -->
+                            <div class="mb-4">
+                            <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
+                            <select id="medico_id" name="medico_id" required>
+                                @foreach($medicos as $medico)
+                                    <option value="{{ $medico->id }}">{{ $medico->nombre }} {{ $medico->apellido }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                             <!-- Motivo de la consulta -->
                             <div>
                                 <label for="motivo_consulta" class="block font-medium text-sm">Motivo de la
@@ -274,14 +286,6 @@
 
         // Add initial remove functionality
         addRemoveFunctionality();
-
-        $(function() {
-            let availablePatients = @json($pacientes->pluck('nombre'));
-
-            $("#paciente").autocomplete({
-                source: availablePatients
-            })
-        });
 
         // Mostrar/Ocultar select de enfermeros
         document.getElementById('enfermero_participacion').addEventListener('change', function() {
