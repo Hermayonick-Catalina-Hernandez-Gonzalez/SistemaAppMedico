@@ -53,7 +53,7 @@
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                         name="pacientes" required>
                         @foreach($pacientes as $paciente)
-                            <option value="{{ $paciente->nombre }} {{ $paciente->apellido}}">{{ $paciente->nombre }} {{ $paciente->apellido }}</option>
+                            <option value="{{ $paciente->id }}">{{ $paciente->nombre }} {{ $paciente->apellido }}</option>
                         @endforeach
                     </select>
                 </div>

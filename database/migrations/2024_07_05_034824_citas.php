@@ -16,7 +16,7 @@ return new class extends Migration
         if(!Schema::hasTable('citas')){
             Schema::create('citas', function (Blueprint $table) {
                 $table->id();
-                $table->string('pacientes');
+                $table->foreignId('pacientes')->nullable()->constrained('pacientes')->onDelete('set null'); // Nuevo campo para almacenar el ID del paciente
                 $table->time('hora');
                 $table->date('fecha');
                 $table->string('servicio');
