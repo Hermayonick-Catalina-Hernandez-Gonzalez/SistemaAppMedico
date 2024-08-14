@@ -23,10 +23,11 @@ class ConsultasMEDICOController extends Controller
             $pacientes = Paciente::all();
             $enfermeros = Enfermero::all();
             $medicos = User::where('role', User::ROL_MEDICO)->get(); // Obtener todos los médicos)
+            $citas = Cita::with('paciente')->get();
 
             $pacienteSeleccionado = $request->input('paciente');
 
-            return view('medico.consultas', compact('servicios', 'productos', 'pacientes', 'enfermeros', 'medicos', 'pacienteSeleccionado'));
+            return view('medico.consultas', compact('servicios', 'productos', 'pacientes', 'enfermeros', 'medicos', 'pacienteSeleccionado', 'citas'));
         }
         
         return redirect()->route('login');

@@ -33,7 +33,7 @@
                             <tbody class="text-gray-600 text-sm">
                                 @foreach($citas as $cita)
                                 <tr class="border-b border-gray-200">
-                                    <td class="py-3 px-6 text-left">{{ $cita->pacientes }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $cita->paciente->nombre }} {{ $cita->paciente->apellido }}</td>
                                     <td class="py-3 px-6 text-left">{{ $cita->fecha }}</td>
                                     <td class="py-3 px-6 text-left">{{ $cita->hora }}</td>
                                     <td class="py-3 px-6 text-left">{{ $cita->servicio }}</td>
