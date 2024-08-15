@@ -37,15 +37,15 @@ class ConsultasMEDICOController extends Controller
 
     public function storeConsulta(Request $request)
     {
-        $validateData = $request->validate([
+        /*$validateData = $request->validate([
             'paciente_id' => 'required|exists:pacientes,id',
-            'medico_id' => 'required|exists:medicos,id',
+            'medico_id' => 'required|exists:users,id',
             'motivo_consulta' => 'nullable|string',
             'notas_padecimiento' => 'nullable|string',
-            'edad' => 'required|string|max:3',
-            'talla' => 'required|string|max:3',
-            'temperatura' => 'required|string|max:3',
-            'peso' => 'required|string|max:3',
+            'edad' => 'required|integer|max:3',
+            'talla' => 'required|numeric|max:3',
+            'temperatura' => 'required|numeric|max:3',
+            'peso' => 'required|numeric|max:3',
             'frecuencia_cardiaca' => 'required|string|max:7',
             'alergias' => 'nullable|string|max:255',
             'diagnostico' => 'nullable|string|max:255',
@@ -56,9 +56,28 @@ class ConsultasMEDICOController extends Controller
             'frecuencia' => 'nullable|string|max:255',
             'duracion' => 'nullable|string|max:255',
             'notas_receta' => 'nullable|string|max:255',
-        ]);
+        ]);*/
 
-        Consulta::create($validateData);
-        return redirect()->route('consultas')->with('success', 'Consulta creada con éxito');
+        Consulta::create([
+            'paciente_id' => $request->paciente_id,
+            'medico_id' => $request->medico_id,
+            'motivo_consulta' => $request->motivo_consulta,
+            'notas_pacecimiento' => $request->notas_padecimiento,
+            'edad' => $request->edad,
+            'talla' => $request->talla,
+            'temperatura' => $request->temperatura,
+            'peso' => $request->peso,
+            'frecuencia_cardiaca' => $request->frecuencia_cardiaca,
+            'alergias' => $request->alergias,
+            'diagnostico' => $request->diagnostico,
+            'solicitar_estudios' => $request->solicitar_estudios,
+            'indicaciones_estudios' => $request->indicaciones_estudios,
+            'medicacion' => $request->medicacion,
+            'cantidad' => $request->cantidad,
+            'frecuencia' => $request->frecuencia,
+            'duracion' => $request->duracion,
+            'notas_receta' => $request->notas_receta,
+        ]);
+        return redirect()->route('dashboard')->with('success', 'Consulta creada con éxito');
     }
 }

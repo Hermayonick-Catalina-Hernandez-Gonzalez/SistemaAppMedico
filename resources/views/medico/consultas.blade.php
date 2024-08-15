@@ -28,17 +28,8 @@
                         <div class="grid grid-cols-1 gap-6">
                             <!-- Nombre del paciente -->
                             <div class="relative">
-                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente</label>
-                                    <select id="paciente_id" name="paciente_id" required >
-                                        @foreach($pacientes as $paciente)
-                                            <option value="{{ $paciente->id }}" 
-                                                @if(isset($pacienteSeleccionado) && $paciente->id == $pacienteSeleccionado->id) 
-                                                    selected 
-                                                @endif>
-                                                {{ $paciente->nombre }} {{ $paciente->apellido }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente <strong>{{$pacienteSeleccionado->nombre}}</strong></label>
+                                    <input type="hidden" name="paciente_id" id="paciente_id" value="{{$pacienteSeleccionado->id}}">
                             </div>
                             <!-- Medico que atendió -->
                             <div class="mb-4">
