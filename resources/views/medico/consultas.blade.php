@@ -28,21 +28,18 @@
                         <div class="grid grid-cols-1 gap-6">
                             <!-- Nombre del paciente -->
                             <div class="relative">
-                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente
-                                    <strong>{{ $pacienteSeleccionado->nombre }}</strong></label>
-                                <input type="hidden" name="paciente_id" id="paciente_id"
-                                    value="{{ $pacienteSeleccionado->id }}">
+                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente <strong>{{$pacienteSeleccionado->nombre}}</strong></label>
+                                    <input type="hidden" name="paciente_id" id="paciente_id" value="{{$pacienteSeleccionado->id}}">
                             </div>
                             <!-- Medico que atendió -->
                             <div class="mb-4">
-                                <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
-                                <select id="medico_id" name="medico_id" required>
-                                    @foreach ($medicos as $medico)
-                                        <option value="{{ $medico->id }}">{{ $medico->nombre }}
-                                            {{ $medico->apellido }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
+                            <select id="medico_id" name="medico_id" required>
+                                @foreach($medicos as $medico)
+                                    <option value="{{ $medico->id }}">{{ $medico->nombre }} {{ $medico->apellido }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                             <!-- Motivo de la consulta -->
                             <div>
                                 <label for="motivo_consulta" class="block font-medium text-sm">Motivo de la
@@ -199,14 +196,14 @@
 
                             <div id="total-container"
                                 class="fixed right-0 top-22 p-4 bg-gray-100 border-l border-gray-300">
-                                <input type="hidden" name="total" id="total">
                                 <h2 class="text-lg font-semibold">Total</h2>
                                 <p id="total-price" class="text-xl font-bold">$0.00</p>
                             </div>
 
                             <div class="flex justify-end mt-4">
-                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Guardar
-                                    Consulta</button>
+                                <x-primary-button class="ms-4">
+                                    {{ __('Terminar consulta') }}
+                                </x-primary-button>
                             </div>
                         </div>
                     </form>
@@ -313,32 +310,66 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function calcularTotal() {
-                let total = 50;
+        function updateTotal() {
+            let total = 50;
 
-                // Sumar precios de los estudios seleccionados
-                document.querySelectorAll('select[name="solicitar_estudios[]"]').forEach(select => {
-                    const precio = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
-                    total += precio;
-                });
+            // Sumar precios de medicamentos
+            document.querySelectorAll('.medicamento').forEach(function(medicamento) {
+                const select = medicamento.querySelector('select[name="medicacion[]"]');
+                const quantityInput = medicamento.querySelector('input[name="cantidad[]"]');
 
-                // Sumar precios de los medicamentos seleccionados
-                document.querySelectorAll('select[name="medicacion[]"]').forEach(select => {
-                    const precio = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
-                    total += precio;
-                });
+                if (select && quantityInput) {
+                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
+                    const quantity = parseInt(quantityInput.value || 0);
 
-                // Mostrar el total en el frontend
-                document.getElementById('total').value = total.toFixed(2);
-                document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+                    total += price * quantity;
+                }
+            });
+
+            // Sumar precios de estudios
+            document.querySelectorAll('.estudio').forEach(function(estudio) {
+                const select = estudio.querySelector('select[name="solicitar_estudios[]"]');
+
+                if (select) {
+                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
+                    total += price;
+                }
+            });
+
+            document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Actualizar el total al cargar la página
+        updateTotal();
+
+        // Actualizar el total cuando se cambian los valores de medicamentos
+        document.getElementById('medicamentos-container').addEventListener('change', function() {
+            updateTotal();
+        });
+
+        // Actualizar el total cuando se cambian los valores de estudios
+        document.getElementById('estudios-container').addEventListener('change', function() {
+            updateTotal();
+        });
+
+        // Actualizar el total cuando se agrega o elimina un medicamento o estudio
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-medicamento') || event.target.classList.contains(
+                    'remove-estudio')) {
+                updateTotal();
             }
+        });
 
-            // Calcular total al cambiar selección de estudios o medicamentos
-            document.getElementById('estudios-container').addEventListener('change', calcularTotal);
-            document.getElementById('medicamentos-container').addEventListener('change', calcularTotal);
+        // Actualizar el total cuando se agrega un nuevo medicamento o estudio
+        document.getElementById('add-medicamento').addEventListener('click', function() {
+            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo medicamento
+        });
+
+        document.getElementById('add-estudio').addEventListener('click', function() {
+            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo estudio
         });
     </script>
+
 </body>
 
 </html>
