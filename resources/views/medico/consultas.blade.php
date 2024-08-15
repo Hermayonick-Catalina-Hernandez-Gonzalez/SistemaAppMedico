@@ -279,6 +279,24 @@
 
         // Inicializa la funcionalidad de eliminación para los elementos ya presentes
         addRemoveFunctionality();
+
+        document.querySelectorAll('select[name="medicacion[]"]').forEach(select => {
+            select.addEventListener('change', function() {
+                const productoId = this.value;
+                const cantidadInput = this.closest('.medicamento').querySelector(
+                'input[name="cantidad[]"]');
+
+                fetch(`/productos/${productoId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const cantidadDisponible = data.cantidad;
+                        cantidadInput.max = cantidadDisponible;
+                        if (parseInt(cantidadInput.value) > cantidadDisponible) {
+                            cantidadInput.value = cantidadDisponible;
+                        }
+                    });
+            });
+        });
     </script>
     <script>
         function calcularTotal() {

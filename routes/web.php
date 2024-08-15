@@ -141,3 +141,4 @@ Route::middleware(['auth', 'SecretarioMiddleware'])->group(function () {
 use App\Http\Controllers\ImageController;
 
 Route::get('/imagen/{id}', [ImageController::class, 'show'])->name('imagen.show');
+Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.show');

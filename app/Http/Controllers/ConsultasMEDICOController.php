@@ -59,6 +59,20 @@ class ConsultasMEDICOController extends Controller
             'notas_receta' => $request->notas_receta,
             'total' =>$request->total,
         ]);
+
+         // Descontar la cantidad de productos
+         $medicaciones = $request->input('medicacion');
+         $cantidades = $request->input('cantidad');
+
+         foreach ($medicaciones as $index => $medicacionId) {
+             $producto = Producto::find($medicacionId);
+             if ($producto) {
+                 $cantidad = intval($cantidades[$index]);
+                 $producto->cantidad -= $cantidad;
+                 $producto->save();
+             }
+         }
+         
         return redirect()->route('dashboard')->with('success', 'Consulta creada con éxito');
     }
 
