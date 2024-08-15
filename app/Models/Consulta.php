@@ -28,6 +28,7 @@ class Consulta extends Model
         'frecuencia',
         'duracion',
         'notas_receta',
+        'total',
     ];
 
     protected $casts = [

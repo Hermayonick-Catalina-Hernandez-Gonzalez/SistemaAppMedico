@@ -194,8 +194,8 @@
                                 </select>
                             </div>
 
-                            <div id="total-container"
-                                class="fixed right-0 top-22 p-4 bg-gray-100 border-l border-gray-300">
+                            <div id="total-container"class="fixed right-0 top-22 p-4 bg-gray-100 border-l border-gray-300">
+                                <input type="hidden" name="total" id="total-input" value="0">
                                 <h2 class="text-lg font-semibold">Total</h2>
                                 <p id="total-price" class="text-xl font-bold">$0.00</p>
                             </div>
