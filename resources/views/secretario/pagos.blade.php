@@ -28,7 +28,7 @@
                                     class="bg-gray-200  text-gray-600  uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-left">Fecha</th>
                                     <th class="py-3 px-6 text-left">Hora</th>
-                                    <th class="py-3 px-6 text-left">Tipo de Servicio</th>
+                                    <th class="py-3 px-6 text-left">Nombre Paciente</th>
                                     <th class="py-3 px-6 text-left">Pago total</th>
                                     <th class="py-3 px-6 text-left">Acción</th>
                                 </tr>
@@ -37,7 +37,7 @@
                                 <tr class="border-b border-gray-200 ">
                                     <td class="py-3 px-6 text-left">05/06/2021</td>
                                     <td class="py-3 px-6 text-left">13:00</td>
-                                    <td class="py-3 px-6 text-left">Consulta General</td>
+                                    <td class="py-3 px-6 text-left">Paciente</td>
                                     <td class="py-3 px-6 text-left">500</td>
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex space-x-2">

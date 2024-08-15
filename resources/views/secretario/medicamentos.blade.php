@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- Token CSRF -->
     <title>Productos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -65,19 +66,23 @@
                     <div id="productosContainer">
                         <!-- Los productos se añadirán aquí dinámicamente -->
                     </div>
-                    <div class="flex justify-end mt-4">
-                        <button type="button" id="addProduct"
-                            class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Añadir Producto
-                        </button>
-                        <button type="submit"
-                            class="ml-2 inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Confirmar Venta
-                        </button>
-                        <button type="button" id="closeModal"
-                            class="ml-2 inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Cancelar
-                        </button>
+                    <div class="flex justify-between mt-4">
+                        <span class="text-lg font-semibold text-gray-900">Total: <span
+                                id="totalPrice">0.00</span></span>
+                        <div>
+                            <button type="button" id="addProduct"
+                                class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Añadir Producto
+                            </button>
+                            <button type="submit"
+                                class="ml-2 inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Confirmar Venta
+                            </button>
+                            <button type="button" id="closeModal"
+                                class="ml-2 inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Cancelar
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -96,21 +101,35 @@
 
         let counter = 1;
 
+        function updateTotal() {
+            const totalPriceElement = document.getElementById('totalPrice');
+            const productosContainer = document.getElementById('productosContainer');
+            let total = 0;
+            productosContainer.querySelectorAll('.producto').forEach(producto => {
+                const cantidadInput = producto.querySelector('input[name="cantidad[]"]');
+                const select = producto.querySelector('select[name="medicacion[]"]');
+                const cantidad = parseFloat(cantidadInput.value) || 0;
+                const precio = parseFloat(select.options[select.selectedIndex].dataset.precio) || 0;
+                total += cantidad * precio;
+            });
+            totalPriceElement.textContent = total.toFixed(2);
+        }
+
         function addProducto() {
             const container = document.getElementById('productosContainer');
             const productoHTML = `
-                <div class="mb-4 flex items-center" id="producto_${counter}">
+                <div class="mb-4 flex items-center producto" id="producto_${counter}">
                     <div class="relative w-1/4 mr-2">
                         <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
                         <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
                             @foreach ($productos as $producto)
-                                <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                                <option value="{{ $producto->id }}" data-precio="{{ $producto->precio }}">{{ $producto->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="relative w-1/4 mr-2">
                         <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
-                        <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad">
+                        <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad" type="number" min="1" step="1" oninput="updateTotal()">
                     </div>
                     <button type="button" onclick="removeProducto('producto_${counter}')" class="text-red-500">Eliminar</button>
                 </div>
@@ -123,6 +142,7 @@
             const element = document.getElementById(id);
             if (element) {
                 element.remove();
+                updateTotal();
             }
         }
 
@@ -134,37 +154,50 @@
             e.preventDefault();
             const formData = new FormData(this);
             fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content')
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Log para depuración
-                    if (data.success) {
-                        alert(data.success);
-                        document.getElementById('modal').classList.add('hidden');
-                        data.updatedProducts.forEach(product => {
-                            const row = document.querySelector(`.producto[data-id="${product.id}"]`);
-                            if (row) {
-                                row.querySelector('.cantidad').textContent = product.cantidad;
-                            }
-                        });
-                    } else {
-                        alert(data.error || 'Error inesperado');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error al realizar la venta');
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Venta Terminada',
+                        text: 'Venta realizada con éxito',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    document.getElementById('modal').classList.add('hidden');
+                    data.updatedProducts.forEach(product => {
+                        const row = document.querySelector(`.producto[data-id="${product.id}"]`);
+                        if (row) {
+                            row.querySelector('.cantidad').textContent = product.cantidad;
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.error || 'Error inesperado',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error al realizar la venta',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
                 });
+            });
         });
-        addProducto();
     </script>
+
 </body>
 
 </html>
