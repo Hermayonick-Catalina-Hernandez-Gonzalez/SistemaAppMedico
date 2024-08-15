@@ -32,6 +32,7 @@ return new class extends Migration
                 $table->string('frecuencia')->nullable();
                 $table->string('duracion')->nullable();
                 $table->text('notas_receta')->nullable();
+                $table->float('total');
                 $table->timestamps();
 
                 $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');

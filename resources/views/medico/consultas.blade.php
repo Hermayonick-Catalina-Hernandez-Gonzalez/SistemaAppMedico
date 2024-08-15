@@ -199,6 +199,7 @@
 
                             <div id="total-container"
                                 class="fixed right-0 top-22 p-4 bg-gray-100 border-l border-gray-300">
+                                <input type="hidden" name="total" id="total">
                                 <h2 class="text-lg font-semibold">Total</h2>
                                 <p id="total-price" class="text-xl font-bold">$0.00</p>
                             </div>
@@ -312,66 +313,32 @@
         });
     </script>
     <script>
-         function updateTotal() {
-            let total = 0;
+        document.addEventListener('DOMContentLoaded', function() {
+            function calcularTotal() {
+                let total = 50;
 
-            // Sumar precios de medicamentos
-            document.querySelectorAll('.medicamento').forEach(function(medicamento) {
-                const select = medicamento.querySelector('select[name="medicacion[]"]');
-                const quantityInput = medicamento.querySelector('input[name="cantidad[]"]');
+                // Sumar precios de los estudios seleccionados
+                document.querySelectorAll('select[name="solicitar_estudios[]"]').forEach(select => {
+                    const precio = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
+                    total += precio;
+                });
 
-                if (select && quantityInput) {
-                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
-                    const quantity = parseInt(quantityInput.value || 0);
+                // Sumar precios de los medicamentos seleccionados
+                document.querySelectorAll('select[name="medicacion[]"]').forEach(select => {
+                    const precio = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
+                    total += precio;
+                });
 
-                    total += price * quantity;
-                }
-            });
-
-            // Sumar precios de estudios
-            document.querySelectorAll('.estudio').forEach(function(estudio) {
-                const select = estudio.querySelector('select[name="solicitar_estudios[]"]');
-
-                if (select) {
-                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
-                    total += price;
-                }
-            });
-
-            document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
-        }
-
-        // Actualizar el total al cargar la página
-        updateTotal();
-
-        // Actualizar el total cuando se cambian los valores de medicamentos
-        document.getElementById('medicamentos-container').addEventListener('change', function() {
-            updateTotal();
-        });
-
-        // Actualizar el total cuando se cambian los valores de estudios
-        document.getElementById('estudios-container').addEventListener('change', function() {
-            updateTotal();
-        });
-
-        // Actualizar el total cuando se agrega o elimina un medicamento o estudio
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('remove-medicamento') || event.target.classList.contains(
-                    'remove-estudio')) {
-                updateTotal();
+                // Mostrar el total en el frontend
+                document.getElementById('total').value = total.toFixed(2);
+                document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
             }
-        });
 
-        // Actualizar el total cuando se agrega un nuevo medicamento o estudio
-        document.getElementById('add-medicamento').addEventListener('click', function() {
-            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo medicamento
-        });
-
-        document.getElementById('add-estudio').addEventListener('click', function() {
-            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo estudio
+            // Calcular total al cambiar selección de estudios o medicamentos
+            document.getElementById('estudios-container').addEventListener('change', calcularTotal);
+            document.getElementById('medicamentos-container').addEventListener('change', calcularTotal);
         });
     </script>
-
 </body>
 
 </html>

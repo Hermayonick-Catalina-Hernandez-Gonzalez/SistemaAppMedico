@@ -37,27 +37,6 @@ class ConsultasMEDICOController extends Controller
 
     public function storeConsulta(Request $request)
     {
-        /*$validateData = $request->validate([
-            'paciente_id' => 'required|exists:pacientes,id',
-            'medico_id' => 'required|exists:users,id',
-            'motivo_consulta' => 'nullable|string',
-            'notas_padecimiento' => 'nullable|string',
-            'edad' => 'required|integer|max:3',
-            'talla' => 'required|numeric|max:3',
-            'temperatura' => 'required|numeric|max:3',
-            'peso' => 'required|numeric|max:3',
-            'frecuencia_cardiaca' => 'required|string|max:7',
-            'alergias' => 'nullable|string|max:255',
-            'diagnostico' => 'nullable|string|max:255',
-            'solicitar_estudios' => 'nullable|string|max:255',
-            'indicaciones_estudios' => 'nullable|string|max:255',
-            'medicacion' => 'nullable|string|max:255',
-            'cantidad' => 'nullable|string|max:255',
-            'frecuencia' => 'nullable|string|max:255',
-            'duracion' => 'nullable|string|max:255',
-            'notas_receta' => 'nullable|string|max:255',
-        ]);*/
-
          // Crear la consulta
          Consulta::create([
             'paciente_id' => $request->paciente_id,
@@ -78,7 +57,15 @@ class ConsultasMEDICOController extends Controller
             'frecuencia' => $request->frecuencia,
             'duracion' => $request->duracion,
             'notas_receta' => $request->notas_receta,
+            'total' =>$request->total,
         ]);
         return redirect()->route('dashboard')->with('success', 'Consulta creada con éxito');
+    }
+
+    public function show($paciente_id)
+    {
+        $consultas = Consulta::where('paciente_id', $paciente_id)->get();
+        $paciente = Paciente::findOrFail($paciente_id);
+        return view('medico.ver-consulta', compact('consultas', 'paciente'));
     }
 }

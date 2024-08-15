@@ -39,8 +39,8 @@
                                     <td class="py-3 px-6 text-left">{{ $cita->servicio }}</td>
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex space-x-2">
-                                            <a href="#" class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                Confirmar Cita
+                                            <a href="{{ route('consultas.show', ['paciente_id' => $cita->paciente->id]) }}" class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                Ver Consulta(s)
                                             </a>
                                             <a href="{{ route('consultas', ['paciente_id' => $cita->paciente->id]) }}" class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                                 Generar Consulta
