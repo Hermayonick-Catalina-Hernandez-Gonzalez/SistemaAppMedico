@@ -48,13 +48,12 @@
                                                     class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                                     Confirmar Pago
                                                 </a>
-                                                <a href="{{ route('ver.ticket', $consulta->id) }}"
+                                                <a href="#" onclick="viewTicket({{ json_encode($consulta) }})"
                                                     class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                                     Ver Ticket
                                                  </a>
                                             </div>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -64,50 +63,34 @@
             </div>
         </div>
     </x-app-layout>
+
+    <!-- Script para mostrar el modal -->
+    <script>
+        function viewTicket(consulta) {
+            Swal.fire({
+                title: 'Ticket de Pago',
+                html: `
+                    <div class="p-4">
+                        <p><strong>Paciente:</strong> ${consulta.paciente.nombre}</p>
+                        <p><strong>Médico:</strong> ${consulta.medico.nombre}</p>
+                        <p><strong>Pago Total:</strong> $${consulta.total}</p>
+                        <p><strong>Fecha:</strong> ${new Date(consulta.created_at).toLocaleDateString()}</p>
+                        <!-- Añadir más detalles aquí si es necesario -->
+                    </div>`,
+                width: '60%',
+                showCloseButton: true,
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'bg-white p-6 rounded-lg shadow-lg'
+                }
+            });
+        }
+
+        function confirmPayment() {
+            // Implementar la lógica para confirmar el pago aquí
+            alert('Pago confirmado.');
+        }
+    </script>
 </body>
 
 </html>
-
-<script>
-    function confirmPayment() {
-        Swal.fire({
-            title: 'Pago Confirmado',
-            text: 'Se ha confirmado su pago exitosamente.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Aquí puedes añadir cualquier acción adicional que necesites
-                // Por ejemplo, redirigir al usuario a otra página o recargar la página
-                window.location.reload(); // Recarga la página
-            }
-        });
-    }
-</script>
-
-<script>
-    function confirmPayment() {
-        Swal.fire({
-            title: 'Confirmar Pago',
-            text: '¿Está seguro de confirmar el pago?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, confirmar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Simulamos la confirmación del pago mediante AJAX
-                // En una aplicación real, aquí harías una petición al backend
-                Swal.fire(
-                    'Pago Confirmado',
-                    'Se ha confirmado su pago exitosamente.',
-                    'success'
-                ).then(() => {
-                    window.location.reload(); // Recargar la página después de la confirmación
-                });
-            }
-        });
-    }
-</script>
