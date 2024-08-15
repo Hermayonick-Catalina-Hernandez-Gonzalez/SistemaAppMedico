@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class Cita extends Model
 {
     use HasFactory, Notifiable;
-    
+
     protected $fillable = [
         'pacientes',
         'hora',

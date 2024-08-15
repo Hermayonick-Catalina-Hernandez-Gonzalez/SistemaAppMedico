@@ -143,3 +143,4 @@ use App\Http\Controllers\ImageController;
 Route::get('/imagen/{id}', [ImageController::class, 'show'])->name('imagen.show');
 Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.show');
 Route::post('/ventas', [ProductosController::class, 'store'])->name('ventas.store');
+Route::get('/ver-ticket/{id}', [PagosController::class, 'generarTicket'])->name('ver.ticket');

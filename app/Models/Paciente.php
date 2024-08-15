@@ -14,7 +14,7 @@ class Paciente extends Model
 
     /**
      * The attributes that are mass assignable.
-     * 
+     *
      * @var array
      */
 
@@ -24,11 +24,7 @@ class Paciente extends Model
         'fecha_nacimiento',
         'telefono',
         'email',
-        'role', 
+        'role',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
