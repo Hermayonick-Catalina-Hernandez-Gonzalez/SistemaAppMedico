@@ -48,6 +48,7 @@ Route::middleware(['auth', 'MedicoMiddleware'])->group(function () {
     Route::get('ver-consulta/{paciente_id}', [ConsultasMEDICOController::class, 'show'])->name('consultas.show');
     Route::get('consultas', [ConsultasMEDICOController::class, 'index'])->name('consultas');
     Route::post('consultas', [ConsultasMEDICOController::class, 'storeConsulta'])->name('consultas.storeConsulta'); //* POST a registrar consultas a BD
+    Route::get('ver-consulta/{paciente_id}', [ConsultasMEDICOController::class, 'show'])->name('consultas.show');
     Route::get('crear-cita', [CrearCitasMEDICOController::class, 'index'])->name('crear-cita');
     Route::post('crear-cita', [CrearCitasMEDICOController::class, 'store'])->name('crear-cita.store');
 });
