@@ -24,13 +24,13 @@ class ConsultasMEDICOController extends Controller
             $enfermeros = Enfermero::all();
             $medicoId = Auth::user()->id;
             $medicos = User::where('role', User::ROL_MEDICO)->get(); // Obtener todos los médicos
-    
+
             $pacienteIdSeleccionado = $request->input('paciente_id');
             $pacienteSeleccionado = Paciente::find($pacienteIdSeleccionado);
-    
+
             return view('medico.consultas', compact('servicios', 'productos', 'pacientes', 'enfermeros', 'pacienteSeleccionado', 'medicoId', 'medicos'));
         }
-        
+
         return redirect()->route('login');
     }
 
@@ -58,11 +58,12 @@ class ConsultasMEDICOController extends Controller
             'notas_receta' => 'nullable|string|max:255',
         ]);*/
 
-        Consulta::create([
+         // Crear la consulta
+         Consulta::create([
             'paciente_id' => $request->paciente_id,
             'medico_id' => $request->medico_id,
             'motivo_consulta' => $request->motivo_consulta,
-            'notas_pacecimiento' => $request->notas_padecimiento,
+            'notas_padecimiento' => $request->notas_padecimiento,
             'edad' => $request->edad,
             'talla' => $request->talla,
             'temperatura' => $request->temperatura,

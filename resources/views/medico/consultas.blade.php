@@ -28,18 +28,21 @@
                         <div class="grid grid-cols-1 gap-6">
                             <!-- Nombre del paciente -->
                             <div class="relative">
-                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente <strong>{{$pacienteSeleccionado->nombre}}</strong></label>
-                                    <input type="hidden" name="paciente_id" id="paciente_id" value="{{$pacienteSeleccionado->id}}">
+                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente
+                                    <strong>{{ $pacienteSeleccionado->nombre }}</strong></label>
+                                <input type="hidden" name="paciente_id" id="paciente_id"
+                                    value="{{ $pacienteSeleccionado->id }}">
                             </div>
                             <!-- Medico que atendió -->
                             <div class="mb-4">
-                            <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
-                            <select id="medico_id" name="medico_id" required>
-                                @foreach($medicos as $medico)
-                                    <option value="{{ $medico->id }}">{{ $medico->nombre }} {{ $medico->apellido }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
+                                <select id="medico_id" name="medico_id" required>
+                                    @foreach ($medicos as $medico)
+                                        <option value="{{ $medico->id }}">{{ $medico->nombre }}
+                                            {{ $medico->apellido }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <!-- Motivo de la consulta -->
                             <div>
                                 <label for="motivo_consulta" class="block font-medium text-sm">Motivo de la
@@ -201,9 +204,8 @@
                             </div>
 
                             <div class="flex justify-end mt-4">
-                                <x-primary-button class="ms-4">
-                                    {{ __('Terminar consulta') }}
-                                </x-primary-button>
+                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Guardar
+                                    Consulta</button>
                             </div>
                         </div>
                     </form>
@@ -310,7 +312,7 @@
         });
     </script>
     <script>
-        function updateTotal() {
+         function updateTotal() {
             let total = 0;
 
             // Sumar precios de medicamentos
