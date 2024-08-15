@@ -81,4 +81,11 @@ class ConsultasMEDICOController extends Controller
         ]);
         return redirect()->route('dashboard')->with('success', 'Consulta creada con éxito');
     }
+
+    public function show($paciente_id)
+    {
+        $consultas = Consulta::where('paciente_id', $paciente_id)->get();
+        $paciente = Paciente::findOrFail($paciente_id);
+        return view('medico.ver-consulta', compact('consultas', 'paciente'));
+    }
 }
