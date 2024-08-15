@@ -28,18 +28,21 @@
                         <div class="grid grid-cols-1 gap-6">
                             <!-- Nombre del paciente -->
                             <div class="relative">
-                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente <strong>{{$pacienteSeleccionado->nombre}}</strong></label>
-                                    <input type="hidden" name="paciente_id" id="paciente_id" value="{{$pacienteSeleccionado->id}}">
+                                <label for="paciente_id" class="block text-sm font-medium text-gray-900">Paciente
+                                    <strong>{{ $pacienteSeleccionado->nombre }}</strong></label>
+                                <input type="hidden" name="paciente_id" id="paciente_id"
+                                    value="{{ $pacienteSeleccionado->id }}">
                             </div>
                             <!-- Medico que atendió -->
                             <div class="mb-4">
-                            <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
-                            <select id="medico_id" name="medico_id" required>
-                                @foreach($medicos as $medico)
-                                    <option value="{{ $medico->id }}">{{ $medico->nombre }} {{ $medico->apellido }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                <label for="medico_id" class="block text-sm font-medium text-gray-900">Médico</label>
+                                <select id="medico_id" name="medico_id" required>
+                                    @foreach ($medicos as $medico)
+                                        <option value="{{ $medico->id }}">{{ $medico->nombre }}
+                                            {{ $medico->apellido }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <!-- Motivo de la consulta -->
                             <div>
                                 <label for="motivo_consulta" class="block font-medium text-sm">Motivo de la
@@ -194,21 +197,20 @@
                                 </select>
                             </div>
 
-                            <div id="total-container"class="fixed right-0 top-22 p-4 bg-gray-100 border-l border-gray-300">
-                                <input type="hidden" name="total" id="total-input" value="0">
-                                <h2 class="text-lg font-semibold">Total</h2>
-                                <p id="total-price" class="text-xl font-bold">$0.00</p>
-                            </div>
-
-                            <div class="flex justify-end mt-4">
-                                <x-primary-button class="ms-4">
-                                    {{ __('Terminar consulta') }}
-                                </x-primary-button>
-                            </div>
+                            <input id="total" name="total" type="text" readonly
+                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900"
+                                value="0.00">
                         </div>
-                    </form>
+
+                        <div class="flex justify-end mt-4">
+                            <x-primary-button class="ms-4">
+                                {{ __('Terminar consulta') }}
+                            </x-primary-button>
+                        </div>
                 </div>
+                </form>
             </div>
+        </div>
         </div>
     </x-app-layout>
 
@@ -216,30 +218,30 @@
         document.getElementById('add-medicamento').addEventListener('click', function() {
             const container = document.getElementById('medicamentos-container');
             const medicamentoHTML = `
-            <div class="flex gap-4 medicamento">
-                <div class="relative w-1/4">
-                    <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
-                    <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
-                        @foreach ($productos as $producto)
-                              <option value="{{ $producto->id }}" data-price="{{ $producto->precio }}">{{ $producto->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="relative w-1/4">
-                    <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad">
-                </div>
-                <div class="relative w-1/4">
-                    <i class="fa fa-clock absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="frecuencia[]" placeholder="Frecuencia">
-                </div>
-                <div class="relative w-1/4">
-                    <i class="fa fa-hourglass-half absolute left-2 top-2.5 text-gray-400"></i>
-                    <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="duracion[]" placeholder="Duración">
-                </div>
-                <button type="button" class="remove-medicamento px-2 py-1 bg-red-600 text-white rounded-md">Eliminar</button>
+        <div class="flex gap-4 medicamento">
+            <div class="relative w-1/4">
+                <i class="fa fa-pills absolute left-2 top-2.5 text-gray-400"></i>
+                <select class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="medicacion[]">
+                    @foreach ($productos as $producto)
+                        <option value="{{ $producto->id }}" data-price="{{ $producto->precio }}">{{ $producto->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
-        `;
+            <div class="relative w-1/4">
+                <i class="fa fa-sort-numeric-up-alt absolute left-2 top-2.5 text-gray-400"></i>
+                <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="cantidad[]" placeholder="Cantidad">
+            </div>
+            <div class="relative w-1/4">
+                <i class="fa fa-clock absolute left-2 top-2.5 text-gray-400"></i>
+                <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="frecuencia[]" placeholder="Frecuencia">
+            </div>
+            <div class="relative w-1/4">
+                <i class="fa fa-hourglass-half absolute left-2 top-2.5 text-gray-400"></i>
+                <input class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900 pl-10" name="duracion[]" placeholder="Duración">
+            </div>
+            <button type="button" class="remove-medicamento px-2 py-1 bg-red-600 text-white rounded-md">Eliminar</button>
+        </div>
+    `;
             container.insertAdjacentHTML('beforeend', medicamentoHTML);
             addRemoveFunctionality();
         });
@@ -247,16 +249,16 @@
         document.getElementById('add-estudio').addEventListener('click', function() {
             const container = document.getElementById('estudios-container');
             const estudioHTML = `
-            <div class="flex gap-4 estudio">
-                <select name="solicitar_estudios[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
-                    @foreach ($servicios as $servicio)
-                       <option value="{{ $servicio->id }}" data-price="{{ $servicio->precio }}">{{ $servicio->nombre }}</option>
-                    @endforeach
-                </select>
-                <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
-                <button type="button" class="remove-estudio px-2 py-1 bg-red-600 text-white rounded-md">Eliminar</button>
-            </div>
-        `;
+        <div class="flex gap-4 estudio">
+            <select name="solicitar_estudios[]" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900">
+                @foreach ($servicios as $servicio)
+                    <option value="{{ $servicio->id }}" data-price="{{ $servicio->precio }}">{{ $servicio->nombre }}</option>
+                @endforeach
+            </select>
+            <textarea class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white text-gray-900" name="indicaciones_estudios[]" placeholder="Escribe indicaciones a considerar"></textarea>
+            <button type="button" class="remove-estudio px-2 py-1 bg-red-600 text-white rounded-md">Eliminar</button>
+        </div>
+    `;
             container.insertAdjacentHTML('beforeend', estudioHTML);
             addRemoveFunctionality();
         });
@@ -275,101 +277,43 @@
             });
         }
 
-        // Add initial remove functionality
+        // Inicializa la funcionalidad de eliminación para los elementos ya presentes
         addRemoveFunctionality();
-
-        // Mostrar/Ocultar select de enfermeros
-        document.getElementById('enfermero_participacion').addEventListener('change', function() {
-            const enfermeroSelect = document.getElementById('enfermero_select');
-            if (this.checked) {
-                enfermeroSelect.style.display = 'block';
-            } else {
-                enfermeroSelect.style.display = 'none';
-            }
-        });
-
-        // Formato para la frecuencia cardiaca
-        document.getElementById('frecuencia_cardiaca').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); // Eliminar cualquier carácter que no sea número
-            if (value.length > 3) {
-                e.target.value = value.slice(0, 3) + '/' + value.slice(3, 5);
-            } else {
-                e.target.value = value;
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const numericFields = ['edad', 'talla', 'temperatura', 'peso'];
-
-            numericFields.forEach(function(fieldId) {
-                const field = document.getElementById(fieldId);
-                field.addEventListener('input', function(event) {
-                    this.value = this.value.replace(/[^0-9]/g, '');
-                });
-            });
-        });
     </script>
     <script>
-        function updateTotal() {
+        function calcularTotal() {
             let total = 50;
 
-            // Sumar precios de medicamentos
-            document.querySelectorAll('.medicamento').forEach(function(medicamento) {
-                const select = medicamento.querySelector('select[name="medicacion[]"]');
-                const quantityInput = medicamento.querySelector('input[name="cantidad[]"]');
-
-                if (select && quantityInput) {
-                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
-                    const quantity = parseInt(quantityInput.value || 0);
-
-                    total += price * quantity;
-                }
+            // Calcular el total de los estudios
+            document.querySelectorAll('#estudios-container .estudio').forEach(estudio => {
+                const select = estudio.querySelector('select');
+                const precio = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
+                total += precio;
             });
 
-            // Sumar precios de estudios
-            document.querySelectorAll('.estudio').forEach(function(estudio) {
-                const select = estudio.querySelector('select[name="solicitar_estudios[]"]');
-
-                if (select) {
-                    const price = parseFloat(select.options[select.selectedIndex].dataset.price || 0);
-                    total += price;
-                }
+            // Calcular el total de los medicamentos
+            document.querySelectorAll('#medicamentos-container .medicamento').forEach(medicamento => {
+                const select = medicamento.querySelector('select');
+                const precio = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
+                const cantidad = parseInt(medicamento.querySelector('input[name="cantidad[]"]').value) || 0;
+                total += precio * cantidad;
             });
 
-            document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+            // Actualizar el valor del input total
+            document.getElementById('total').value = total.toFixed(2);
         }
 
-        // Actualizar el total al cargar la página
-        updateTotal();
-
-        // Actualizar el total cuando se cambian los valores de medicamentos
-        document.getElementById('medicamentos-container').addEventListener('change', function() {
-            updateTotal();
-        });
-
-        // Actualizar el total cuando se cambian los valores de estudios
-        document.getElementById('estudios-container').addEventListener('change', function() {
-            updateTotal();
-        });
-
-        // Actualizar el total cuando se agrega o elimina un medicamento o estudio
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('remove-medicamento') || event.target.classList.contains(
-                    'remove-estudio')) {
-                updateTotal();
+        // Agregar eventos para recalcular el total cuando se cambie un estudio o medicamento
+        document.addEventListener('change', event => {
+            if (event.target.matches('#estudios-container select') || event.target.matches(
+                    '#medicamentos-container select') || event.target.matches('input[name="cantidad[]"]')) {
+                calcularTotal();
             }
         });
 
-        // Actualizar el total cuando se agrega un nuevo medicamento o estudio
-        document.getElementById('add-medicamento').addEventListener('click', function() {
-            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo medicamento
-        });
-
-        document.getElementById('add-estudio').addEventListener('click', function() {
-            setTimeout(updateTotal, 0); // Retrasar la actualización para que se agregue el nuevo estudio
-        });
+        // Inicializar el total al cargar la página
+        window.addEventListener('load', calcularTotal);
     </script>
-
 </body>
 
 </html>
